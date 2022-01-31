@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Login from './components/Login/Login';
+import Footer from './components/shared/Footer';
 
 const AppContainer = styled.div`
   color: #707070;
@@ -9,6 +10,7 @@ function App() {
   return (
     <AppContainer>
       <Login />
+      <Footer />
     </AppContainer>
   );
 }
