@@ -4,10 +4,11 @@ import TextLink from '../../shared/TextLink';
 import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/BoldText';
 import { Link } from 'react-router-dom';
+import TransitionPage from '../../shared/TransitionPage';
 
 const LoginForm = () => {
   return (
-    <div>
+    <TransitionPage>
       <BoldText>Authentication</BoldText>
       <Card>
         <Input type='email' placeholder='Email' />
@@ -18,7 +19,7 @@ const LoginForm = () => {
         <TextButton primary text='Log in' arrow />
       </Card>
       <TextButton text='Sign Up' arrow />
-    </div>
+    </TransitionPage>
   );
 };
 
