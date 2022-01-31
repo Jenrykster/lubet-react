@@ -5,7 +5,7 @@ export default styled.a`
   font-style: italic;
   margin-left: auto;
   margin-right: 0.3rem;
-  margin-top: 0rem;
+  margin-top: 1rem;
   color: #c1c1c1;
   text-decoration: none;
   a {

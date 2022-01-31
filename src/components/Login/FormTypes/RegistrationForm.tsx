@@ -1,27 +1,24 @@
 import Card from '../../shared/Card';
 import Input from '../../shared/Input';
-import TextLink from '../../shared/TextLink';
 import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/BoldText';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import TransitionPage from '../../shared/TransitionPage';
 
-const LoginForm = () => {
+const RegistrationForm = () => {
   const navigate = useNavigate();
   return (
     <TransitionPage>
-      <BoldText>Authentication</BoldText>
+      <BoldText>Registration</BoldText>
       <Card>
+        <Input type='text' placeholder='Name' />
         <Input type='email' placeholder='Email' />
         <Input type='password' placeholder='Password' />
-        <TextLink href='#'>
-          <Link to='/reset'>I forgot my password</Link>
-        </TextLink>
-        <TextButton primary text='Log in' arrow />
+        <TextButton primary text='Register' arrow />
       </Card>
-      <TextButton text='Sign Up' arrow onClick={() => navigate('/register')} />
+      <TextButton arrowLeft text='Back' onClick={() => navigate('/')} />
     </TransitionPage>
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

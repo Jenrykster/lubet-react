@@ -9,7 +9,7 @@ export default styled.input`
   outline: none;
 
   margin-top: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   margin-left: -16px;
   margin-right: -16px;
 
