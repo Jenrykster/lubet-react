@@ -1,4 +1,6 @@
+import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
+import Form from './components/Login/Form';
 import Login from './components/Login/Login';
 import Footer from './components/shared/Footer';
 
@@ -10,6 +12,7 @@ function App() {
   return (
     <AppContainer>
       <Login />
+      {/* <Route path='*' element={<Navigate to='/' />} /> */}
       <Footer />
     </AppContainer>
   );
