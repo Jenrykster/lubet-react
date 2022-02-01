@@ -9,7 +9,7 @@ const LoginCheck: React.FC = (props) => {
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('/games');
+      navigate('/');
     }
   }, [navigate, isLoggedIn]);
   if (isLoggedIn) {
