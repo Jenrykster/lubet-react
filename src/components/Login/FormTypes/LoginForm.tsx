@@ -24,6 +24,7 @@ const LoginForm = () => {
     event.preventDefault();
     if (isLoggedIn) {
       Swal.fire("You're already logged in!", '', 'info');
+      navigate('/games');
       return;
     }
     const response = await login(email, password);
