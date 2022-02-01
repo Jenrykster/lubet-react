@@ -1,6 +1,6 @@
 import Card from '../../shared/Card';
 import Input from '../../shared/Input';
-import TextLink from '../../shared/TextLink';
+import TextLink from '../../shared/Text';
 import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/BoldText';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ const LoginForm = () => {
       <Card>
         <Input type='email' placeholder='Email' />
         <Input type='password' placeholder='Password' />
-        <TextLink href='#'>
+        <TextLink>
           <Link to='/reset'>I forgot my password</Link>
         </TextLink>
         <TextButton primary text='Log in' arrow />
