@@ -1,5 +1,11 @@
+import Header from '../shared/Header';
+
 const Games = () => {
-  return <h1>GAMES</h1>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 
 export default Games;
