@@ -23,6 +23,7 @@ const RegistrationForm = () => {
         ? 'Registrado com sucesso!'
         : response.data.error?.message || 'Error';
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
+    navigate('/');
   };
   return (
     <TransitionPage>
