@@ -1,4 +1,4 @@
-import Centered from '../shared/Centered';
+import Centered from '../shared/Primitives/Centered';
 import Form from './Form';
 import Title from './Title';
 
