@@ -1,4 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
+import Cart, { CartContainer } from '../../shared/Cart';
 import GameSelector from '../../shared/GameSelector';
 import Button from '../../shared/Primitives/Button';
 import H1 from '../../shared/Primitives/H1';
@@ -21,7 +23,7 @@ const BoldP = styled.p`
 `;
 const StyledMain = styled.main`
   padding: 2rem 6rem;
-  width: 50vw;
+  width: 55vw;
   ${Button}:first-child {
     margin-right: 1rem;
   }
@@ -29,31 +31,41 @@ const StyledMain = styled.main`
     width: 90%;
   }
 `;
+const NewBetContainer = styled.div`
+  display: flex;
+  ${CartContainer} {
+    margin-top: 2rem;
+  }
+`;
 
 const Main = () => {
   return (
-    <StyledMain>
-      <H1>
-        <b>NEW BET </b>
-        FOR MEGA-SENA
-      </H1>
-      <BoldP>Choose a game</BoldP>
-      <GameSelector />
-      <BoldP>Fill your bet</BoldP>
-      <GameDescription>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
-        repellendus tempore ipsum adipisci a, nemo saepe maxime. Ab culpa esse
-        sit, neque, exercitationem quis quos vitae ipsum placeat deserunt iste.
-      </GameDescription>
-      <NumberGrid />
-      <Row>
+    <NewBetContainer>
+      <StyledMain>
+        <H1>
+          <b>NEW BET </b>
+          FOR MEGA-SENA
+        </H1>
+        <BoldP>Choose a game</BoldP>
+        <GameSelector />
+        <BoldP>Fill your bet</BoldP>
+        <GameDescription>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
+          repellendus tempore ipsum adipisci a, nemo saepe maxime. Ab culpa esse
+          sit, neque, exercitationem quis quos vitae ipsum placeat deserunt
+          iste.
+        </GameDescription>
+        <NumberGrid />
         <Row>
-          <Button>Complete Game</Button>
-          <Button>Clear Game</Button>
+          <Row>
+            <Button>Complete Game</Button>
+            <Button>Clear Game</Button>
+          </Row>
+          <AddToCartButton />
         </Row>
-        <AddToCartButton />
-      </Row>
-    </StyledMain>
+      </StyledMain>
+      <Cart />
+    </NewBetContainer>
   );
 };
 

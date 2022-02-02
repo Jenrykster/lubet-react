@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from '../../shared/Primitives/Button';
 import { IoMdCart } from 'react-icons/io';
+import Aligned from '../../shared/Primitives/Aligned';
 
 const CartButton = styled(Button)`
   padding: 0.5rem 2rem;
@@ -13,11 +14,6 @@ const CartButton = styled(Button)`
     height: 1.5rem;
     margin-right: 2rem;
   }
-`;
-const Aligned = styled.div`
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
 `;
 
 const AddToCartButton = () => {
