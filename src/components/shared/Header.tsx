@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import TextButton, { Button } from './TextButton';
+import Column from './Column';
+import Row from './Row';
+import TextButton, { TextButtonStyles } from './TextButton';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -8,10 +10,13 @@ const StyledHeader = styled.header`
   padding-left: 100px;
   border-bottom: 2px solid #ebebeb;
 
-  ${Button} {
+  ${TextButtonStyles} {
     font-size: 1.1rem;
     margin: 0;
     margin-right: 3rem;
+  }
+  ${TextButtonStyles}:last-child {
+    margin-right: 8rem;
   }
 `;
 
@@ -34,14 +39,14 @@ const CurvedUnderline = styled.div`
 const Header = () => {
   return (
     <StyledHeader>
-      <div>
+      <Column>
         <HeaderLogo>TGL</HeaderLogo>
         <CurvedUnderline />
-      </div>
-      <div style={{ display: 'flex' }}>
+      </Column>
+      <Row>
         <TextButton text='Account' />
         <TextButton text='Sign out' arrow />
-      </div>
+      </Row>
     </StyledHeader>
   );
 };

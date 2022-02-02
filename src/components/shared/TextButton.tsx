@@ -11,7 +11,7 @@ interface IButtonStyleProps {
   arrowLeft: boolean;
 }
 
-export const Button = styled.button<IButtonStyleProps>`
+export const TextButtonStyles = styled.button<IButtonStyleProps>`
   display: flex;
   align-items: center;
 
@@ -31,8 +31,9 @@ export const Button = styled.button<IButtonStyleProps>`
   }
 
   svg {
-    width: 1.2rem;
-    height: 1.2rem;
+    transform: scaleX(1.3);
+    width: 1.5rem;
+    height: 1.5rem;
     margin-left: 0.7rem;
   }
 `;
@@ -51,11 +52,15 @@ const TextButton = (props: {
     arrowLeft: props.arrowLeft ? props.arrowLeft : false,
   };
   return (
-    <Button {...buttonProps} style={props.style || {}} onClick={props.onClick}>
+    <TextButtonStyles
+      {...buttonProps}
+      style={props.style || {}}
+      onClick={props.onClick}
+    >
       {props.arrowLeft && <ArrowLeft />}
       {props.text}
       {props.arrow && <ArrowRight />}
-    </Button>
+    </TextButtonStyles>
   );
 };
 
