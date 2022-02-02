@@ -20,6 +20,7 @@ const StyledMain = styled.main`
   ${TextButtonStyles} {
     color: #b5c401;
     font-size: 1.7rem;
+    margin-right: 5rem;
   }
 `;
 
