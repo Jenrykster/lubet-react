@@ -8,15 +8,37 @@ import TransitionPage from '../../shared/TransitionPage';
 import { FormEvent, useState } from 'react';
 import { login } from '../../../auth/auth';
 import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../../store/slices/userSlice';
+import { RootState } from '../../../store/store';
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+
   const authenticate = async (event: FormEvent) => {
     event.preventDefault();
+    if (isLoggedIn) {
+      Swal.fire("You're already logged in!", '', 'info');
+      navigate('/games');
+      return;
+    }
     const response = await login(email, password);
+    if (response.status === 200 && response.data.user) {
+      dispatch(
+        loginUser({
+          email: response.data.user.email,
+          name: response.data.user.name,
+          isAdmin: response.data.user.isAdmin,
+          token: response.data.user.token,
+        })
+      );
+    }
+
     const icon = response.status === 200 ? 'success' : 'error';
     const title =
       icon === 'success'

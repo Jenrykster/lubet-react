@@ -7,14 +7,16 @@ const api = axios.create({
 
 interface Data {
   message?: string;
-  token?: string;
   user?: User;
+  token?: { token: string; expires_at: string };
   error?: { message: string };
 }
 interface User {
   id: number;
   name: string;
+  email: string;
   isAdmin: number;
+  token: string;
 }
 
 interface Response {

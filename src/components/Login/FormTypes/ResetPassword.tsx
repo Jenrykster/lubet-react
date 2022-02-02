@@ -17,7 +17,9 @@ const ResetPassword = () => {
     const response = await resetPassword(email);
     const icon = response.status === 200 ? 'success' : 'error';
     const title =
-      icon === 'success' ? 'Logado com sucesso!' : 'Email não encontrado';
+      icon === 'success'
+        ? 'Email de recuperação enviado'
+        : 'Email não encontrado';
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
   };
   return (

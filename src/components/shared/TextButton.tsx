@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   AiOutlineArrowRight as ArrowRight,
   AiOutlineArrowLeft as ArrowLeft,
@@ -10,7 +11,7 @@ interface IButtonStyleProps {
   arrowLeft: boolean;
 }
 
-const Button = styled.button<IButtonStyleProps>`
+export const TextButtonStyles = styled.button<IButtonStyleProps>`
   display: flex;
   align-items: center;
 
@@ -30,8 +31,9 @@ const Button = styled.button<IButtonStyleProps>`
   }
 
   svg {
-    width: 30px;
-    height: 30px;
+    transform: scaleX(1.3);
+    width: 1.5rem;
+    height: 1.5rem;
     margin-left: 0.7rem;
   }
 `;
@@ -41,6 +43,7 @@ const TextButton = (props: {
   primary?: boolean;
   arrow?: boolean;
   arrowLeft?: boolean;
+  style?: React.CSSProperties;
   onClick?: () => void;
 }) => {
   const buttonProps = {
@@ -49,11 +52,15 @@ const TextButton = (props: {
     arrowLeft: props.arrowLeft ? props.arrowLeft : false,
   };
   return (
-    <Button {...buttonProps} onClick={props.onClick}>
+    <TextButtonStyles
+      {...buttonProps}
+      style={props.style || {}}
+      onClick={props.onClick}
+    >
       {props.arrowLeft && <ArrowLeft />}
       {props.text}
       {props.arrow && <ArrowRight />}
-    </Button>
+    </TextButtonStyles>
   );
 };
 
