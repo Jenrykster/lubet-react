@@ -4,7 +4,6 @@ import SelectorButton from './SelectorButton';
 
 const SelectorButtonContainer = styled(Row)`
   margin: auto 0rem;
-
   ${SelectorButton}:first-child {
     margin-left: 0;
   }

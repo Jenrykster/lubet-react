@@ -15,13 +15,13 @@ const StyledMain = styled.main`
     align-items: center;
   }
   ${P} {
-    margin-left: 3.5rem;
+    margin-left: 1.5rem;
     margin-right: 1rem;
   }
   ${TextButtonStyles} {
     color: #b5c401;
     font-size: 1.7rem;
-    margin-right: 5rem;
+    margin-right: 2rem;
   }
 `;
 
