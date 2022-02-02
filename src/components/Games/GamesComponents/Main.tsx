@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Column from '../../shared/Column';
 import H1 from '../../shared/H1';
@@ -26,6 +27,7 @@ const StyledMain = styled.main`
 
 const DUMMY_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const Main = () => {
+  const navigate = useNavigate();
   return (
     <StyledMain>
       <Row>
@@ -42,7 +44,7 @@ const Main = () => {
             </SelectorButtonContainer>
           </Row>
         </Row>
-        <TextButton text='New Bet' arrow />
+        <TextButton text='New Bet' onClick={() => navigate('/new-bet')} arrow />
       </Row>
       <Column>
         <GameContainer
