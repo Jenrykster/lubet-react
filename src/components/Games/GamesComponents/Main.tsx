@@ -32,7 +32,9 @@ const Main = () => {
     <StyledMain>
       <Row>
         <Row>
-          <H1>RECENT GAMES</H1>
+          <H1>
+            <b>RECENT GAMES</b>
+          </H1>
           <Row>
             <SelectorButtonContainer>
               <P>Filters</P>
