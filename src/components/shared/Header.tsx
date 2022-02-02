@@ -33,6 +33,7 @@ const CurvedUnderline = styled.div`
   margin-bottom: -3px;
   width: 100%;
   border: #b5c401 solid 3px;
+  background-color: #b5c401;
   border-radius: 4px;
 `;
 
