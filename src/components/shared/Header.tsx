@@ -1,6 +1,9 @@
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Column from './Column';
-import Row from './Row';
+import { logoutUser } from '../../store/slices/userSlice';
+import Column from './Primitives/Column';
+import Row from './Primitives/Row';
 import TextButton, { TextButtonStyles } from './TextButton';
 
 const StyledHeader = styled.header`
@@ -13,10 +16,11 @@ const StyledHeader = styled.header`
   ${TextButtonStyles} {
     font-size: 1.1rem;
     margin: 0;
-    margin-right: 3rem;
+    margin-right: 1rem;
   }
   ${TextButtonStyles}:last-child {
     margin-right: 8rem;
+    margin-left: 3rem;
   }
 `;
 
@@ -37,16 +41,28 @@ const CurvedUnderline = styled.div`
   border-radius: 4px;
 `;
 
-const Header = () => {
+const Header = (props: { showHomeButton?: boolean }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <StyledHeader>
-      <Column>
-        <HeaderLogo>TGL</HeaderLogo>
-        <CurvedUnderline />
-      </Column>
+      <Row>
+        <Column>
+          <HeaderLogo>TGL</HeaderLogo>
+          <CurvedUnderline />
+        </Column>
+        {props.showHomeButton && (
+          <TextButton text='Home' onClick={() => navigate('/games')} />
+        )}
+      </Row>
       <Row>
         <TextButton text='Account' />
-        <TextButton text='Sign out' arrow />
+        <TextButton
+          text='Sign out'
+          arrow
+          onClick={() => dispatch(logoutUser())}
+        />
       </Row>
     </StyledHeader>
   );

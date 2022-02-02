@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Column from '../../shared/Column';
-import H1 from '../../shared/H1';
-import P from '../../shared/P';
-import Row from '../../shared/Row';
+import Column from '../../shared/Primitives/Column';
+import H1 from '../../shared/Primitives/H1';
+import P from '../../shared/Primitives/P';
+import Row from '../../shared/Primitives/Row';
 import SelectorButton from '../../shared/SelectorButton';
 import TextButton, { TextButtonStyles } from '../../shared/TextButton';
 import GameContainer from './GameContainer';

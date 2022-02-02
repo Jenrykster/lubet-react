@@ -1,5 +1,13 @@
+import Header from '../shared/Header';
+import Main from './NewBetComponents/Main';
+
 const NewBet = () => {
-  return <h1>New Bet</h1>;
+  return (
+    <div>
+      <Header showHomeButton />
+      <Main />
+    </div>
+  );
 };
 
 export default NewBet;

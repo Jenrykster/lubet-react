@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import PageNotFound from '../shared/PageNotFound';
+import PageNotFound from '../shared/Utils/PageNotFound';
 import LoginForm from './FormTypes/LoginForm';
 import RegistrationForm from './FormTypes/RegistrationForm';
 import ResetPassword from './FormTypes/ResetPassword';

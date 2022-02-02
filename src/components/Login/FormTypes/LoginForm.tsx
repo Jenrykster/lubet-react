@@ -1,10 +1,10 @@
-import Card from '../../shared/Card';
-import Input from '../../shared/Input';
-import TextLink from '../../shared/Text';
+import Card from '../../shared/Primitives/Card';
+import Input from '../../shared/Primitives/Input';
+import TextLink from '../../shared/Primitives/Text';
 import TextButton from '../../shared/TextButton';
-import BoldText from '../../shared/BoldText';
+import BoldText from '../../shared/Primitives/BoldText';
 import { Link, useNavigate } from 'react-router-dom';
-import TransitionPage from '../../shared/TransitionPage';
+import TransitionPage from '../../shared/Utils/TransitionPage';
 import { FormEvent, useState } from 'react';
 import { login } from '../../../auth/auth';
 import Swal from 'sweetalert2';

@@ -1,9 +1,9 @@
-import Card from '../../shared/Card';
-import Input from '../../shared/Input';
+import Card from '../../shared/Primitives/Card';
+import Input from '../../shared/Primitives/Input';
 import TextButton from '../../shared/TextButton';
-import BoldText from '../../shared/BoldText';
+import BoldText from '../../shared/Primitives/BoldText';
 import { useNavigate } from 'react-router-dom';
-import TransitionPage from '../../shared/TransitionPage';
+import TransitionPage from '../../shared/Utils/TransitionPage';
 import { FormEvent, useState } from 'react';
 import { resetPassword } from '../../../auth/auth';
 import Swal from 'sweetalert2';
