@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import GameSelector from '../../shared/GameSelector';
 import H1 from '../../shared/Primitives/H1';
 
 const StyledMain = styled.main`
@@ -19,6 +20,7 @@ const Main = () => {
         FOR MEGA-SENA
       </H1>
       <p>Choose a game</p>
+      <GameSelector />
     </StyledMain>
   );
 };

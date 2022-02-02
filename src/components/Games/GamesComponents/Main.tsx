@@ -1,23 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import GameSelector from '../../shared/GameSelector';
 import Column from '../../shared/Primitives/Column';
 import H1 from '../../shared/Primitives/H1';
 import P from '../../shared/Primitives/P';
 import Row from '../../shared/Primitives/Row';
-import SelectorButton from '../../shared/SelectorButton';
 import TextButton, { TextButtonStyles } from '../../shared/TextButton';
 import GameContainer from './GameContainer';
 
-const SelectorButtonContainer = styled(Row)`
-  margin: auto 3.5rem;
-`;
 const StyledMain = styled.main`
   padding: 3rem 6rem;
 
   ${Row} {
     align-items: center;
   }
-
+  ${P} {
+    margin-left: 3.5rem;
+    margin-right: 1rem;
+  }
   ${TextButtonStyles} {
     color: #b5c401;
     font-size: 1.7rem;
@@ -35,16 +35,8 @@ const Main = () => {
           <H1>
             <b>RECENT GAMES</b>
           </H1>
-          <Row>
-            <SelectorButtonContainer>
-              <P>Filters</P>
-              <SelectorButton color='#7F3992' active>
-                LotoFácil
-              </SelectorButton>
-              <SelectorButton color='#01AC66'>Mega-Sena</SelectorButton>
-              <SelectorButton color='#F79C31'>Lotomania</SelectorButton>
-            </SelectorButtonContainer>
-          </Row>
+          <P>Filters</P>
+          <GameSelector />
         </Row>
         <TextButton text='New Bet' onClick={() => navigate('/new-bet')} arrow />
       </Row>
