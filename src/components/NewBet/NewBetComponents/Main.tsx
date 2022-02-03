@@ -47,7 +47,7 @@ const Main = () => {
           FOR MEGA-SENA
         </H1>
         <BoldP>Choose a game</BoldP>
-        <GameSelector />
+        <GameSelector required />
         <BoldP>Fill your bet</BoldP>
         <GameDescription>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde

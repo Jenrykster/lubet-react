@@ -37,8 +37,7 @@ export const gamesSlice = createSlice({
     },
     changeSelectedGame: (state, action: PayloadAction<{ gameId: number }>) => {
       state.selectedGame =
-        state.types.find((game) => game.id === action.payload.gameId) ||
-        state.types[0];
+        state.types.find((game) => game.id === action.payload.gameId) || null;
     },
   },
 });
