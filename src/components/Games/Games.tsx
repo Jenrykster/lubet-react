@@ -1,6 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { Watch } from 'react-loader-spinner';
+import { useDispatch } from 'react-redux';
+import { GameType, updateGames } from '../../store/slices/gamesSlice';
 import getGames from '../../utils/getGames';
 import ErrorMessage from '../shared/ErrorMessage';
 import Header from '../shared/Header';
@@ -10,6 +12,7 @@ import Main from './GamesComponents/Main';
 const Games = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const checkIfIsError = (requestResponse: AxiosResponse | Error) => {
@@ -20,26 +23,35 @@ const Games = () => {
         setIsError(haveError);
       }
     };
-
+    const updateGamesData = (games: {
+      min_cart_value: number;
+      types: GameType[];
+    }) => {
+      dispatch(
+        updateGames({
+          minCartValue: games['min_cart_value'],
+          types: games.types,
+        })
+      );
+    };
     async function getData() {
       setIsLoading(true);
 
       const gameData = await getGames();
-
+      updateGamesData('data' in gameData && gameData.data);
       checkIfIsError(gameData);
 
       setIsLoading(false);
-      console.log(gameData);
     }
     getData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
       <Header />
       {isLoading && (
         <Centered>
-          <Watch wrapperStyle={{ 'margin-top': '-5rem' }} />
+          <Watch wrapperStyle={{ marginTop: '-5rem' }} />
         </Centered>
       )}
       {!isLoading && !isError && <Main />}
