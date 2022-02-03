@@ -44,7 +44,7 @@ const GameContainer = (props: GameContainerProps) => {
       <Column>
         <h4>{formatNumbers(props.numbers)}</h4>
         <p>
-          {props.date} - (R${props.price})
+          {props.date} - ({props.price})
         </p>
         <h3>{props.gameName}</h3>
       </Column>

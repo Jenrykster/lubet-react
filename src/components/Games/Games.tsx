@@ -13,6 +13,7 @@ import Main from './GamesComponents/Main';
 const Games = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [bets, setBets] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const Games = () => {
       setIsLoading(false);
 
       const bets = await getBets();
-      console.log(bets);
+      setBets('data' in bets && bets.data);
     }
     getData();
   }, [dispatch]);
@@ -58,7 +59,7 @@ const Games = () => {
           <Watch wrapperStyle={{ marginTop: '-5rem' }} />
         </Centered>
       )}
-      {!isLoading && !isError && <Main />}
+      {!isLoading && !isError && <Main bets={bets} />}
       {!isLoading && isError && <ErrorMessage />}
     </div>
   );

@@ -1,12 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import GameSelector from '../../shared/GameSelector';
-import Column from '../../shared/Primitives/Column';
 import H1 from '../../shared/Primitives/H1';
 import P from '../../shared/Primitives/P';
 import Row from '../../shared/Primitives/Row';
 import TextButton, { TextButtonStyles } from '../../shared/TextButton';
-import GameContainer from './GameContainer';
+import BetsList, { BetType } from './BetsList';
 
 const StyledMain = styled.main`
   padding: 3rem 6rem;
@@ -25,8 +24,7 @@ const StyledMain = styled.main`
   }
 `;
 
-const DUMMY_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const Main = () => {
+const Main = (props: { bets: BetType[] }) => {
   const navigate = useNavigate();
   return (
     <StyledMain>
@@ -40,15 +38,7 @@ const Main = () => {
         </Row>
         <TextButton text='New Bet' onClick={() => navigate('/new-bet')} arrow />
       </Row>
-      <Column>
-        <GameContainer
-          color='#7F3992'
-          numbers={DUMMY_NUMBERS}
-          gameName='Lotofácil'
-          price='2,50'
-          date='30/11/2020'
-        />
-      </Column>
+      <BetsList bets={props.bets} />
     </StyledMain>
   );
 };
