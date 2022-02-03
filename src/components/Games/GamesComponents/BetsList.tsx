@@ -54,7 +54,7 @@ const BetsList = (props: { bets: BetType[] }) => {
             style: 'currency',
             currency: 'BRL',
           })}
-          date={bet.created_at}
+          date={new Date(bet.created_at).toLocaleDateString()}
         />
       );
     });
