@@ -33,13 +33,13 @@ const LoginForm = () => {
       return;
     }
     const response = await login(email, password);
-    if (response.status === 200 && response.data.user) {
+    if (response.status === 200 && response.data.user && response.data.token) {
       dispatch(
         loginUser({
           email: response.data.user.email,
           name: response.data.user.name,
           isAdmin: response.data.user.isAdmin,
-          token: response.data.user.token,
+          token: response.data.token.token,
         })
       );
     }

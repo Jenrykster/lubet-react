@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Watch } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
 import { GameType, updateGames } from '../../store/slices/gamesSlice';
+import getBets from '../../utils/getBets';
 import getGames from '../../utils/getGames';
 import ErrorMessage from '../shared/ErrorMessage';
 import Header from '../shared/Header';
@@ -42,6 +43,9 @@ const Games = () => {
       checkIfIsError(gameData);
 
       setIsLoading(false);
+
+      const bets = await getBets();
+      console.log(bets);
     }
     getData();
   }, [dispatch]);
