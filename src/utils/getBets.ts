@@ -19,10 +19,12 @@ function updateApi() {
 }
 
 const getBets = async (typeFilter: string | null = null) => {
-  const params = typeFilter ? new URLSearchParams({ 'type[]': '' }) : {};
+  const params = typeFilter
+    ? new URLSearchParams({ 'type[]': typeFilter })
+    : {};
   let response: AxiosResponse | Error;
   try {
-    response = await api.get('bet/all-bets', params);
+    response = await api.get('bet/all-bets', { params });
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       response = error.response;

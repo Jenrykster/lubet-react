@@ -12,11 +12,13 @@ export type GameType = {
 export interface GameState {
   minCartValue: number;
   types: GameType[];
+  selectedGame: GameType | null;
 }
 
 const initialState: GameState = {
   minCartValue: 0,
   types: [],
+  selectedGame: null,
 };
 
 export const gamesSlice = createSlice({
@@ -33,10 +35,15 @@ export const gamesSlice = createSlice({
       state.minCartValue = action.payload.minCartValue;
       state.types = action.payload.types;
     },
+    changeSelectedGame: (state, action: PayloadAction<{ gameId: number }>) => {
+      state.selectedGame =
+        state.types.find((game) => game.id === action.payload.gameId) ||
+        state.types[0];
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateGames } = gamesSlice.actions;
+export const { updateGames, changeSelectedGame } = gamesSlice.actions;
 
 export default gamesSlice.reducer;

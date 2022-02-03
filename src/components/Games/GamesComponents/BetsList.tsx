@@ -18,6 +18,7 @@ const ScrollableColumn = styled(Column)`
   height: 60vh;
   overflow-y: scroll;
   padding-right: 2em;
+  min-width: 45vw;
   width: fit-content;
 
   ::-webkit-scrollbar {
@@ -44,6 +45,7 @@ const BetsList = (props: { bets: BetType[] }) => {
       const gameColor = games.find((game) => game.id === bet.type.id)?.color;
       return (
         <GameContainer
+          key={bet.id}
           color={gameColor || 'black'}
           numbers={bet.choosen_numbers
             .split(',')

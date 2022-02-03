@@ -1,8 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { Watch } from 'react-loader-spinner';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GameType, updateGames } from '../../store/slices/gamesSlice';
+import { RootState } from '../../store/store';
 import getBets from '../../utils/getBets';
 import getGames from '../../utils/getGames';
 import ErrorMessage from '../shared/ErrorMessage';
@@ -14,6 +15,9 @@ const Games = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [bets, setBets] = useState([]);
+  const selectedGameType = useSelector(
+    (state: RootState) => state.games.selectedGame?.type
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,11 +49,11 @@ const Games = () => {
 
       setIsLoading(false);
 
-      const bets = await getBets();
+      const bets = await getBets(selectedGameType);
       setBets('data' in bets && bets.data);
     }
     getData();
-  }, [dispatch]);
+  }, [dispatch, selectedGameType]);
 
   return (
     <div>
