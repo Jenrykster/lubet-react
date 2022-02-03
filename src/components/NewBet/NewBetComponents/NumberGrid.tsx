@@ -1,14 +1,6 @@
 import styled from 'styled-components';
+import NumberButton from './NumberButton';
 
-const NumberButton = styled.div`
-  display: flex;
-  justify-content: center;
-  color: snow;
-  background-color: #adc0c4;
-  width: 10px;
-  padding: 0.9rem 1.2rem;
-  border-radius: 50%;
-`;
 const Grid = styled.div<{ columns: number }>`
   display: grid;
   grid-template-columns: ${(props) => 'repeat(' + props.columns + ', 1fr)'};
@@ -36,12 +28,26 @@ const ScrollableGridContainer = styled.div<{ color: string }>`
   }
   margin-bottom: 0.5rem;
 `;
-const NumberGrid = (props: { color: string; range: number }) => {
+const NumberGrid = (props: {
+  color: string;
+  range: number;
+  selectedNumbers: number[];
+  onNumberSelect: (n: number) => void;
+}) => {
   const generateNumbers = (totalNumbers: number) => {
     let components = [];
     for (let actualNumber = 1; actualNumber <= totalNumbers; actualNumber++) {
       let newNumberButton = (
-        <NumberButton>{actualNumber.toString().padStart(2, '0')}</NumberButton>
+        <NumberButton
+          active={props.selectedNumbers.includes(actualNumber)}
+          color={props.color}
+          key={Math.random() * Date.now()}
+          onButtonToggle={() => {
+            props.onNumberSelect(actualNumber);
+          }}
+        >
+          {actualNumber.toString().padStart(2, '0')}
+        </NumberButton>
       );
       components.push(newNumberButton);
     }

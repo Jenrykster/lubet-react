@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { RootState } from '../../../store/store';
@@ -44,7 +44,21 @@ const Main = () => {
   const selectedGame = useSelector(
     (state: RootState) => state.games.selectedGame
   );
+  const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
 
+  useEffect(() => {
+    setSelectedNumbers([]);
+  }, [selectedGame]);
+  const numberSelectHandler = (selectedNumber: number) => {
+    setSelectedNumbers((prev) => {
+      if (prev.includes(selectedNumber)) {
+        return prev.filter((n) => n !== selectedNumber);
+      } else {
+        return [...prev, selectedNumber];
+      }
+    });
+    console.log(selectedNumbers);
+  };
   return (
     <NewBetContainer>
       <StyledMain>
@@ -57,6 +71,8 @@ const Main = () => {
         <BoldP>Fill your bet</BoldP>
         <GameDescription>{selectedGame?.description}</GameDescription>
         <NumberGrid
+          onNumberSelect={numberSelectHandler}
+          selectedNumbers={selectedNumbers}
           color={selectedGame?.color || 'black'}
           range={selectedGame?.range || 36}
         />
