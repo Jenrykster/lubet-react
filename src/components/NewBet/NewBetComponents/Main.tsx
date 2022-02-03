@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { RootState } from '../../../store/store';
 import Cart, { CartContainer } from '../../shared/Cart';
 import GameSelector from '../../shared/GameSelector';
 import Button from '../../shared/Primitives/Button';
@@ -39,23 +41,25 @@ const NewBetContainer = styled.div`
 `;
 
 const Main = () => {
+  const selectedGame = useSelector(
+    (state: RootState) => state.games.selectedGame
+  );
+
   return (
     <NewBetContainer>
       <StyledMain>
         <H1>
           <b>NEW BET </b>
-          FOR MEGA-SENA
+          FOR {selectedGame?.type.toUpperCase()}
         </H1>
         <BoldP>Choose a game</BoldP>
         <GameSelector required />
         <BoldP>Fill your bet</BoldP>
-        <GameDescription>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
-          repellendus tempore ipsum adipisci a, nemo saepe maxime. Ab culpa esse
-          sit, neque, exercitationem quis quos vitae ipsum placeat deserunt
-          iste.
-        </GameDescription>
-        <NumberGrid />
+        <GameDescription>{selectedGame?.description}</GameDescription>
+        <NumberGrid
+          color={selectedGame?.color || 'black'}
+          range={selectedGame?.range || 36}
+        />
         <Row>
           <Row>
             <Button>Complete Game</Button>
