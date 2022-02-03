@@ -8,7 +8,7 @@ const api = axios.create({
 const getGames = async () => {
   let response: AxiosResponse | Error;
   try {
-    response = await api.get('cat_games');
+    response = await api.get('cart_games');
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       response = error.response;
