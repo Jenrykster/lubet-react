@@ -5,7 +5,7 @@ import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/Primitives/BoldText';
 import { Link, useNavigate } from 'react-router-dom';
 import TransitionPage from '../../shared/Utils/TransitionPage';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import { login } from '../../../auth/auth';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +20,11 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate('/games');
+    }
+  }, [navigate, isLoggedIn]);
   const authenticate = async (event: FormEvent) => {
     event.preventDefault();
     if (isLoggedIn) {
@@ -45,6 +50,7 @@ const LoginForm = () => {
         ? 'Logado com sucesso!'
         : response.data.message || 'Error';
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
+    navigate('/games');
   };
   return (
     <TransitionPage>
