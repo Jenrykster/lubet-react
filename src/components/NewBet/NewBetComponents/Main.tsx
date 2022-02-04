@@ -86,7 +86,7 @@ const Main = () => {
       for (let i = generatedNumbers.length; i < selectedGame?.max_number; i++) {
         let randomNumber = Math.floor(Math.random() * selectedGame.range);
 
-        while (generatedNumbers.includes(randomNumber)) {
+        while (generatedNumbers.includes(randomNumber) || randomNumber === 0) {
           randomNumber = Math.floor(Math.random() * selectedGame.range);
         }
 
