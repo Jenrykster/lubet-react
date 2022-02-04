@@ -9,7 +9,7 @@ const NumberButtonStyles = styled.div<{ active?: boolean; color: string }>`
   width: 10px;
   padding: 0.9rem 1.2rem;
   border-radius: 50%;
-
+  user-select: none;
   &:hover {
     cursor: pointer;
     background-color: ${(props) => (props.active ? props.color : '#a2b4b8')};

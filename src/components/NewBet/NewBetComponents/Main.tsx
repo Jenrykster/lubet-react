@@ -57,7 +57,26 @@ const Main = () => {
         return [...prev, selectedNumber];
       }
     });
-    console.log(selectedNumbers);
+  };
+
+  const generateRandomNumbers = () => {
+    if (selectedGame) {
+      const generatedNumbers: number[] = [];
+      for (let i = 0; i < selectedGame?.max_number; i++) {
+        let randomNumber = Math.floor(Math.random() * selectedGame.range);
+
+        while (generatedNumbers.includes(randomNumber)) {
+          randomNumber = Math.floor(Math.random() * selectedGame.range);
+        }
+
+        generatedNumbers.push(randomNumber);
+      }
+      setSelectedNumbers(generatedNumbers);
+    }
+  };
+  const addSelectedNumbersToCart = (numbers: number[]) => {
+    console.log(numbers);
+    // TODO: Add numbers to cart slice
   };
   return (
     <NewBetContainer>
@@ -78,10 +97,18 @@ const Main = () => {
         />
         <Row>
           <Row>
-            <Button>Complete Game</Button>
-            <Button>Clear Game</Button>
+            <Button onClick={generateRandomNumbers}>Complete Game</Button>
+            <Button
+              onClick={() => {
+                setSelectedNumbers([]);
+              }}
+            >
+              Clear Game
+            </Button>
           </Row>
-          <AddToCartButton />
+          <AddToCartButton
+            onClick={() => addSelectedNumbersToCart(selectedNumbers)}
+          />
         </Row>
       </StyledMain>
       <Cart />
