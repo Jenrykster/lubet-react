@@ -16,7 +16,7 @@ export type BetType = {
 
 const ScrollableColumn = styled(Column)`
   height: 60vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-right: 2em;
   min-width: 45vw;
   width: fit-content;

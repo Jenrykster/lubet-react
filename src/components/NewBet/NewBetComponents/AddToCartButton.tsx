@@ -16,9 +16,9 @@ const CartButton = styled(Button)`
   }
 `;
 
-const AddToCartButton = () => {
+const AddToCartButton = (props: { onClick: () => void }) => {
   return (
-    <CartButton>
+    <CartButton onClick={props.onClick}>
       <Aligned>
         <IoMdCart />
         Add to cart
