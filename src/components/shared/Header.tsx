@@ -45,6 +45,10 @@ const Header = (props: { showHomeButton?: boolean }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+    localStorage.removeItem('userData');
+  };
   return (
     <StyledHeader>
       <Row>
@@ -58,11 +62,7 @@ const Header = (props: { showHomeButton?: boolean }) => {
       </Row>
       <Row>
         <TextButton text='Account' />
-        <TextButton
-          text='Sign out'
-          arrow
-          onClick={() => dispatch(logoutUser())}
-        />
+        <TextButton text='Sign out' arrow onClick={logoutHandler} />
       </Row>
     </StyledHeader>
   );

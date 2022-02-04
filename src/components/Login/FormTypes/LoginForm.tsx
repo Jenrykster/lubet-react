@@ -34,14 +34,14 @@ const LoginForm = () => {
     }
     const response = await login(email, password);
     if (response.status === 200 && response.data.user && response.data.token) {
-      dispatch(
-        loginUser({
-          email: response.data.user.email,
-          name: response.data.user.name,
-          isAdmin: response.data.user.isAdmin,
-          token: response.data.token.token,
-        })
-      );
+      const userData = {
+        email: response.data.user.email,
+        name: response.data.user.name,
+        isAdmin: response.data.user.isAdmin,
+        token: response.data.token.token,
+      };
+      dispatch(loginUser(userData));
+      localStorage.setItem('userData', JSON.stringify(userData));
     }
 
     const icon = response.status === 200 ? 'success' : 'error';
