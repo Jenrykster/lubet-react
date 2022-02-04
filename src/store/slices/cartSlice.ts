@@ -30,7 +30,7 @@ export const cartSlice = createSlice({
     ) => {
       state.bets.push({
         id: Date.now() * Math.random(),
-        numbers: action.payload.numbers,
+        numbers: action.payload.numbers.sort((a, b) => a - b),
         gameTypeId: action.payload.gameId,
         price: action.payload.price,
       });

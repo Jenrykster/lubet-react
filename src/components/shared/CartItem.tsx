@@ -5,17 +5,23 @@ import P from './Primitives/P';
 import Row from './Primitives/Row';
 
 const CartDataContainer = styled.div`
-  border-left: 4px solid #7f3992;
+  border-left: 4px solid ${(props) => props.color};
   border-radius: 5px;
   padding-left: 10px;
+
+  margin: 10px auto;
+  width: 100%;
+  height: fit-content;
 
   ${P} {
     margin-bottom: 0;
     font-weight: 800;
+    width: 100%;
+    white-space: normal;
     color: #868686;
   }
   h4 {
-    color: #7f3992;
+    color: ${(props) => props.color};
     font-style: italic;
     font-weight: 800;
     margin-right: 1rem;
@@ -29,20 +35,34 @@ const CartDataContainer = styled.div`
 const CartItemContainer = styled(Aligned)`
   svg {
     margin-left: 0;
-    width: 2rem;
-    height: 2rem;
+    width: 3em;
+    height: 3rem;
+  }
+  svg:hover {
+    cursor: pointer;
   }
 `;
 
-const CartItem = () => {
+const CartItem = (props: {
+  numbers: number[];
+  gameType: string;
+  price: number;
+  color: string;
+}) => {
   return (
     <CartItemContainer>
       <IoIosTrash />
-      <CartDataContainer>
-        <P>01,02,03,04,05,06,07,08,09...</P>
+      <CartDataContainer color={props.color}>
+        <P>{props.numbers.join(', ')}</P>
         <Row>
-          <h4>Lotofácil</h4>
-          <p>R$2,50</p>
+          <h4>{props.gameType}</h4>
+          <p>
+            {props.price.toLocaleString('pt-BR', {
+              minimumFractionDigits: 2,
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </p>
         </Row>
       </CartDataContainer>
     </CartItemContainer>
