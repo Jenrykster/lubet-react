@@ -13,7 +13,7 @@ export const CartContainer = styled.div`
   background-color: snow;
   margin-top: 2rem;
   width: 25vw;
-  height: 70vh;
+  height: 65vh;
   padding: 1rem 0.5rem;
   border-radius: 1rem;
   border: #e2e2e2 1px solid;
@@ -26,7 +26,6 @@ export const CartContainer = styled.div`
   }
   ${TextButtonStyles} {
     justify-content: center;
-    margin-top: 1rem;
     margin-bottom: -1rem;
     color: #27c383;
     background-color: #e2e2e2;
@@ -36,7 +35,11 @@ export const CartContainer = styled.div`
     margin-left: -0.55rem;
     border-radius: 0px 0px 1rem 1rem;
   }
-
+  ${H1}:last-of-type {
+    padding-top: 1.5rem;
+    margin-top: auto;
+    margin-bottom: 0px;
+  }
   ${Column} {
     overflow-y: auto;
     ::-webkit-scrollbar {

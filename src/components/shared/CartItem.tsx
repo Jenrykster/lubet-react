@@ -33,6 +33,7 @@ const CartDataContainer = styled.div`
 `;
 
 const CartItemContainer = styled(Aligned)`
+  animation: pop 0.2s ease;
   svg {
     margin-left: 0;
     width: 3em;
@@ -40,6 +41,18 @@ const CartItemContainer = styled(Aligned)`
   }
   svg:hover {
     cursor: pointer;
+  }
+
+  @keyframes pop {
+    from {
+      transform: scale(0);
+    }
+    80% {
+      transform: scale(1.2);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 `;
 
