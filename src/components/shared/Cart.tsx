@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { CartItemType } from '../../store/slices/cartSlice';
+import { CartItemType, clearCart } from '../../store/slices/cartSlice';
 import { RootState } from '../../store/store';
 import CartItem from './CartItem';
 import Column from './Primitives/Column';
@@ -8,6 +8,8 @@ import H1 from './Primitives/H1';
 import TextButton, { TextButtonStyles } from './TextButton';
 import EmptyCartMessage from './EmptyCartMessage';
 import { useEffect, useRef } from 'react';
+import Swal from 'sweetalert2';
+import postBets from '../../utils/postBets';
 
 export const CartContainer = styled.div`
   display: flex;
@@ -62,8 +64,12 @@ export const CartContainer = styled.div`
 `;
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const gameTypes = useSelector((state: RootState) => state.games.types);
   const cartItems = useSelector((state: RootState) => state.cart.bets);
+  const minimumCartPrice = useSelector(
+    (state: RootState) => state.games.minCartValue
+  );
   const cartTotalPrice = useSelector(
     (state: RootState) => state.cart.totalPrice
   );
@@ -85,6 +91,35 @@ const Cart = () => {
         />
       );
     });
+  };
+
+  const saveBets = async () => {
+    if (cartTotalPrice < 30) {
+      Swal.fire(
+        'Add more bets to your cart',
+        `The minimum cart price is ${minimumCartPrice.toLocaleString('pt-BR', {
+          minimumFractionDigits: 2,
+          style: 'currency',
+          currency: 'BRL',
+        })}`,
+        'error'
+      );
+    } else {
+      const mappedCartItems = cartItems.map((cartItem) => {
+        return { game_id: cartItem.gameTypeId, numbers: cartItem.numbers };
+      });
+      const response = await postBets(mappedCartItems);
+      if ('status' in response && response.status === 200) {
+        dispatch(clearCart());
+        Swal.fire('Saved !', 'Your bets were saved with success', 'success');
+      } else {
+        Swal.fire(
+          'Sorry !',
+          'There was an error while saving your bets',
+          'error'
+        );
+      }
+    }
   };
 
   useEffect(() => {
@@ -114,7 +149,7 @@ const Cart = () => {
           currency: 'BRL',
         })}
       </H1>
-      <TextButton text='Save' arrow />
+      <TextButton onClick={saveBets} text='Save' arrow />
     </CartContainer>
   );
 };
