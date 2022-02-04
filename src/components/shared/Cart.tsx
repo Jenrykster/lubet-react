@@ -7,6 +7,7 @@ import Column from './Primitives/Column';
 import H1 from './Primitives/H1';
 import TextButton, { TextButtonStyles } from './TextButton';
 import EmptyCartMessage from './EmptyCartMessage';
+import { useEffect, useRef } from 'react';
 
 export const CartContainer = styled.div`
   display: flex;
@@ -66,6 +67,7 @@ const Cart = () => {
   const cartTotalPrice = useSelector(
     (state: RootState) => state.cart.totalPrice
   );
+  const scrollableColumnRef = useRef<HTMLDivElement>(null);
 
   const generateCartItems = (cartItems: CartItemType[]) => {
     return cartItems.map((cartItem) => {
@@ -85,12 +87,23 @@ const Cart = () => {
     });
   };
 
+  useEffect(() => {
+    if (scrollableColumnRef.current) {
+      scrollableColumnRef.current.scrollTop =
+        scrollableColumnRef.current?.scrollHeight;
+    }
+  }, [cartItems]);
+
   return (
     <CartContainer>
       <H1>
         <b>CART</b>
       </H1>
-      {cartItems.length > 0 && <Column>{generateCartItems(cartItems)}</Column>}
+      {cartItems.length > 0 && (
+        <Column ref={scrollableColumnRef}>
+          {generateCartItems(cartItems)}
+        </Column>
+      )}
       {cartItems.length === 0 && <EmptyCartMessage />}
       <H1>
         <b>CART </b>
