@@ -70,7 +70,6 @@ const Main = () => {
         `The maximum amount of numbers in this game is ${selectedGame?.max_number}`,
         'warning'
       );
-      console.log(selectedNumbers);
     }
   };
 
@@ -80,8 +79,11 @@ const Main = () => {
 
   const generateRandomNumbers = () => {
     if (selectedGame) {
-      const generatedNumbers: number[] = [];
-      for (let i = 0; i < selectedGame?.max_number; i++) {
+      let generatedNumbers: number[] = [];
+      if (selectedNumbers.length > 0) {
+        generatedNumbers = [...selectedNumbers];
+      }
+      for (let i = generatedNumbers.length; i < selectedGame?.max_number; i++) {
         let randomNumber = Math.floor(Math.random() * selectedGame.range);
 
         while (generatedNumbers.includes(randomNumber)) {
