@@ -36,6 +36,11 @@ export const cartSlice = createSlice({
       });
       state.totalPrice += action.payload.price;
     },
+    deleteCartItem: (state, action: PayloadAction<{ betId: number }>) => {
+      state.totalPrice -=
+        state.bets.find((bet) => bet.id === action.payload.betId)?.price || 0;
+      state.bets = state.bets.filter((bet) => bet.id !== action.payload.betId);
+    },
     clearCart: (state) => {
       state.bets = [];
       state.totalPrice = 0;
@@ -44,6 +49,6 @@ export const cartSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToCart, clearCart } = cartSlice.actions;
+export const { addToCart, deleteCartItem, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

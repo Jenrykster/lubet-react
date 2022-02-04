@@ -73,6 +73,7 @@ const Cart = () => {
       );
       return (
         <CartItem
+          id={cartItem.id}
           key={cartItem.id}
           gameType={gameType?.type || ''}
           numbers={cartItem.numbers}

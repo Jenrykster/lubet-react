@@ -1,5 +1,7 @@
 import { IoIosTrash } from 'react-icons/io';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { deleteCartItem } from '../../store/slices/cartSlice';
 import Aligned from './Primitives/Aligned';
 import P from './Primitives/P';
 import Row from './Primitives/Row';
@@ -47,9 +49,6 @@ const CartItemContainer = styled(Aligned)`
     from {
       transform: scale(0);
     }
-    80% {
-      transform: scale(1.2);
-    }
     to {
       transform: scale(1);
     }
@@ -61,10 +60,14 @@ const CartItem = (props: {
   gameType: string;
   price: number;
   color: string;
+  id: number;
 }) => {
+  const dispatch = useDispatch();
   return (
     <CartItemContainer>
-      <IoIosTrash />
+      <IoIosTrash
+        onClick={() => dispatch(deleteCartItem({ betId: props.id }))}
+      />
       <CartDataContainer color={props.color}>
         <P>{props.numbers.join(', ')}</P>
         <Row>
