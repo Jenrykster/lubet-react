@@ -6,6 +6,7 @@ import CartItem from './CartItem';
 import Column from './Primitives/Column';
 import H1 from './Primitives/H1';
 import TextButton, { TextButtonStyles } from './TextButton';
+import EmptyCartMessage from './EmptyCartMessage';
 
 export const CartContainer = styled.div`
   display: flex;
@@ -83,12 +84,14 @@ const Cart = () => {
       );
     });
   };
+
   return (
     <CartContainer>
       <H1>
         <b>CART</b>
       </H1>
-      <Column>{generateCartItems(cartItems)}</Column>
+      {cartItems.length > 0 && <Column>{generateCartItems(cartItems)}</Column>}
+      {cartItems.length === 0 && <EmptyCartMessage />}
       <H1>
         <b>CART </b>
         TOTAL:{' '}
