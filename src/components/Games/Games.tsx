@@ -2,7 +2,11 @@ import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { Watch } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { GameType, updateGames } from '../../store/slices/gamesSlice';
+import {
+  changeSelectedGame,
+  GameType,
+  updateGames,
+} from '../../store/slices/gamesSlice';
 import { RootState } from '../../store/store';
 import getBets from '../../utils/getBets';
 import getGames from '../../utils/getGames';
@@ -55,6 +59,9 @@ const Games = () => {
     getData();
   }, [dispatch, selectedGameType]);
 
+  useEffect(() => {
+    dispatch(changeSelectedGame({ gameId: -1 }));
+  }, [dispatch]);
   return (
     <div>
       <Header />
