@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
+import { addToCart } from '../../../store/slices/cartSlice';
 import { RootState } from '../../../store/store';
 import Cart, { CartContainer } from '../../shared/Cart';
 import GameSelector from '../../shared/GameSelector';
@@ -41,6 +43,9 @@ const NewBetContainer = styled.div`
 `;
 
 const Main = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart);
+
   const selectedGame = useSelector(
     (state: RootState) => state.games.selectedGame
   );
@@ -49,14 +54,28 @@ const Main = () => {
   useEffect(() => {
     setSelectedNumbers([]);
   }, [selectedGame]);
+
   const numberSelectHandler = (selectedNumber: number) => {
-    setSelectedNumbers((prev) => {
-      if (prev.includes(selectedNumber)) {
-        return prev.filter((n) => n !== selectedNumber);
-      } else {
-        return [...prev, selectedNumber];
-      }
-    });
+    if (selectedNumbers.length < (selectedGame?.max_number || 0)) {
+      setSelectedNumbers((prev) => {
+        if (prev.includes(selectedNumber)) {
+          return prev.filter((n) => n !== selectedNumber);
+        } else {
+          return [...prev, selectedNumber];
+        }
+      });
+    } else {
+      Swal.fire(
+        "You can't add more numbers!",
+        `The maximum amount of numbers in this game is ${selectedGame?.max_number}`,
+        'warning'
+      );
+      console.log(selectedNumbers);
+    }
+  };
+
+  const clearNumbers = () => {
+    setSelectedNumbers([]);
   };
 
   const generateRandomNumbers = () => {
@@ -75,8 +94,39 @@ const Main = () => {
     }
   };
   const addSelectedNumbersToCart = (numbers: number[]) => {
-    console.log(numbers);
-    // TODO: Add numbers to cart slice
+    if (selectedNumbers.length < (selectedGame?.max_number || 0)) {
+      Swal.fire(
+        'Add more numbers',
+        `You need to add ${
+          selectedGame && selectedGame.max_number - selectedNumbers.length
+        } more numbers to make a ${selectedGame && selectedGame.type} bet`,
+        'warning'
+      );
+      return;
+    }
+    const isRepeated = cart.bets.some(
+      (cartItem) =>
+        cartItem.numbers.toString() === numbers.toString() &&
+        cartItem.gameTypeId === selectedGame?.id
+    );
+    if (isRepeated) {
+      Swal.fire(
+        'Duplicated game!',
+        "There's already an identical game in your cart",
+        'warning'
+      );
+      return;
+    }
+    if (selectedGame) {
+      dispatch(
+        addToCart({
+          numbers,
+          gameId: selectedGame.id,
+          price: selectedGame.price,
+        })
+      );
+      clearNumbers();
+    }
   };
   return (
     <NewBetContainer>
@@ -98,13 +148,7 @@ const Main = () => {
         <Row>
           <Row>
             <Button onClick={generateRandomNumbers}>Complete Game</Button>
-            <Button
-              onClick={() => {
-                setSelectedNumbers([]);
-              }}
-            >
-              Clear Game
-            </Button>
+            <Button onClick={clearNumbers}>Clear Game</Button>
           </Row>
           <AddToCartButton
             onClick={() => addSelectedNumbersToCart(selectedNumbers)}

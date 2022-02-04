@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 const NumberButtonStyles = styled.div<{ active?: boolean; color: string }>`
@@ -21,17 +20,11 @@ const NumberButton = (props: {
   children: React.ReactNode;
   onButtonToggle: () => void;
 }) => {
-  const [isActive, setIsActive] = useState(props.active);
-
-  const toggleActive = () => {
-    setIsActive((prevState) => !prevState);
-    props.onButtonToggle();
-  };
   return (
     <NumberButtonStyles
       color={props.color}
-      active={isActive}
-      onClick={toggleActive}
+      active={props.active}
+      onClick={props.onButtonToggle}
     >
       {props.children}
     </NumberButtonStyles>
