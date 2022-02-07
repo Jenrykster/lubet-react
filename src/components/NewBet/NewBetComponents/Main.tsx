@@ -56,7 +56,10 @@ const Main = () => {
   }, [selectedGame]);
 
   const numberSelectHandler = (selectedNumber: number) => {
-    if (selectedNumbers.length < (selectedGame?.max_number || 0)) {
+    if (
+      selectedNumbers.length < (selectedGame?.max_number || 0) ||
+      selectedNumbers.includes(selectedNumber)
+    ) {
       setSelectedNumbers((prev) => {
         if (prev.includes(selectedNumber)) {
           return prev.filter((n) => n !== selectedNumber);
