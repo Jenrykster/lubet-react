@@ -1,6 +1,7 @@
 import { IoIosTrash } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import Swal from 'sweetalert2';
 import { deleteCartItem } from '../../store/slices/cartSlice';
 import Aligned from './Primitives/Aligned';
 import P from './Primitives/P';
@@ -63,11 +64,28 @@ const CartItem = (props: {
   id: number;
 }) => {
   const dispatch = useDispatch();
+
+  const onCartItemDelete = () => {
+    Swal.fire({
+      title: 'Are you sure ?',
+      icon: 'question',
+      showDenyButton: true,
+      confirmButtonText: 'Delete',
+      confirmButtonColor: '#dc3741',
+      denyButtonText: 'Cancel',
+      denyButtonColor: '#6e7881',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCartItem({ betId: props.id }));
+      } else if (result.isDenied) {
+        return;
+      }
+    });
+  };
+
   return (
     <CartItemContainer>
-      <IoIosTrash
-        onClick={() => dispatch(deleteCartItem({ betId: props.id }))}
-      />
+      <IoIosTrash onClick={onCartItemDelete} />
       <CartDataContainer color={props.color}>
         <P>{props.numbers.join(', ')}</P>
         <Row>
