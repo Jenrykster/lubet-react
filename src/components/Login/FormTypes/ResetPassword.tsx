@@ -1,19 +1,26 @@
 import Card from '../../shared/Primitives/Card';
 import Input from '../../shared/Primitives/Input';
+import ErrorLabel from '../../shared/Primitives/ErrorLabel';
 import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/Primitives/BoldText';
 import { useNavigate } from 'react-router-dom';
 import TransitionPage from '../../shared/Utils/TransitionPage';
-import { FormEvent, useState } from 'react';
 import { resetPassword } from '../../../auth/auth';
+import resetPasswordSchema from '../../../auth/schemas/resetPassword';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Swal from 'sweetalert2';
 
 const ResetPassword = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(resetPasswordSchema) });
 
-  const resetPasswordHandler = async (event: FormEvent) => {
-    event.preventDefault();
+  const resetPasswordHandler = async (data: any) => {
+    const { email } = data;
     const response = await resetPassword(email);
     const icon = response.status === 200 ? 'success' : 'error';
     const title =
@@ -25,15 +32,12 @@ const ResetPassword = () => {
   return (
     <TransitionPage>
       <BoldText>Reset Password</BoldText>
-      <form onSubmit={resetPasswordHandler}>
+      <form onSubmit={handleSubmit(resetPasswordHandler)}>
         <Card>
-          <Input
-            type='email'
-            placeholder='Email'
-            required
-            value={email}
-            onChange={(ev) => setEmail(ev.target.value)}
-          />
+          {errors.email && (
+            <ErrorLabel htmlFor='email'>{errors.email.message}</ErrorLabel>
+          )}
+          <Input type='email' placeholder='Email' {...register('email')} />
           <TextButton primary text='Send link' arrow />
         </Card>
       </form>

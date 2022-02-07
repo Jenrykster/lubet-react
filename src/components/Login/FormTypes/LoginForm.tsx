@@ -5,17 +5,24 @@ import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/Primitives/BoldText';
 import { Link, useNavigate } from 'react-router-dom';
 import TransitionPage from '../../shared/Utils/TransitionPage';
-import { FormEvent, useState, useEffect } from 'react';
-import { login } from '../../../auth/auth';
+import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../../store/slices/userSlice';
 import { RootState } from '../../../store/store';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import loginSchema from '../../../auth/schemas/login';
+import ErrorLabel from '../../shared/Primitives/ErrorLabel';
+import { login } from '../../../auth/auth';
+import { loginUser } from '../../../store/slices/userSlice';
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(loginSchema) });
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -25,15 +32,21 @@ const LoginForm = () => {
       navigate('/games');
     }
   }, [navigate, isLoggedIn]);
-  const authenticate = async (event: FormEvent) => {
-    event.preventDefault();
+
+  const authenticate = async (data: any) => {
+    const { email, password } = data;
     if (isLoggedIn) {
       Swal.fire("You're already logged in!", '', 'info');
       navigate('/games');
       return;
     }
     const response = await login(email, password);
-    if (response.status === 200 && response.data.user && response.data.token) {
+    if (
+      response &&
+      response.status === 200 &&
+      response.data.user &&
+      response.data.token
+    ) {
       const userData = {
         email: response.data.user.email,
         name: response.data.user.name,
@@ -43,33 +56,30 @@ const LoginForm = () => {
       dispatch(loginUser(userData));
       localStorage.setItem('userData', JSON.stringify(userData));
     }
-
-    const icon = response.status === 200 ? 'success' : 'error';
-    const title =
-      icon === 'success'
-        ? 'Logado com sucesso!'
-        : response.data.message || 'Error';
+    const icon = response && response.status === 200 ? 'success' : 'error';
+    const errorMessage =
+      (response && response.data.message) || 'There was an error !';
+    const title = icon === 'success' ? 'Logado com sucesso!' : errorMessage;
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
     navigate('/games');
   };
+
   return (
     <TransitionPage>
       <BoldText>Authentication</BoldText>
-      <form onSubmit={authenticate}>
+      <form onSubmit={handleSubmit(authenticate)}>
         <Card>
-          <Input
-            type='email'
-            placeholder='Email'
-            value={email}
-            onChange={(ev) => setEmail(ev.target.value)}
-            required
-          />
+          {errors.email && (
+            <ErrorLabel htmlFor='email'>{errors.email.message}</ErrorLabel>
+          )}
+          <Input type='text' placeholder='Email' {...register('email')} />
+          {errors.password && (
+            <ErrorLabel htmlFor='password'>min password length is 6</ErrorLabel>
+          )}
           <Input
             type='password'
             placeholder='Password'
-            value={password}
-            onChange={(ev) => setPassword(ev.target.value)}
-            required
+            {...register('password')}
           />
           <TextLink>
             <Link to='/reset'>I forgot my password</Link>
