@@ -61,6 +61,11 @@ export const CartContainer = styled.div`
       border-radius: 10px;
     }
   }
+
+  @media (max-width: 700px) {
+    display: none;
+    position: absolute;
+  }
 `;
 
 const Cart = () => {

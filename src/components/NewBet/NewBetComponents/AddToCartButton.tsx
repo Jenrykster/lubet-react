@@ -3,7 +3,7 @@ import Button from '../../shared/Primitives/Button';
 import { IoMdCart } from 'react-icons/io';
 import Aligned from '../../shared/Primitives/Aligned';
 
-const CartButton = styled(Button)`
+export const CartButton = styled(Button)`
   padding: 0.5rem 2rem;
   background-color: #27c383;
   color: snow;
@@ -13,6 +13,10 @@ const CartButton = styled(Button)`
     width: 1.5rem;
     height: 1.5rem;
     margin-right: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    margin-left: 0;
   }
 `;
 

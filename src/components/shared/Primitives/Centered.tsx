@@ -5,4 +5,10 @@ export default styled.div`
   justify-content: space-around;
   align-items: center;
   height: 100vh;
+
+  @media (max-width: 700px) {
+    justify-content: space-evenly;
+
+    flex-direction: column;
+  }
 `;

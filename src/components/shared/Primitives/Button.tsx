@@ -12,4 +12,8 @@ export default styled.button`
     color: snow;
     cursor: pointer;
   }
+
+  @media (max-width: 700px) {
+    margin: 0;
+  }
 `;

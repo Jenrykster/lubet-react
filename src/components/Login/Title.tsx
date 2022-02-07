@@ -21,6 +21,17 @@ const TitleStyle = styled.div`
     margin: 0px auto;
     padding: 5px 10px;
   }
+
+  @media (max-width: 700px) {
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+    h3 {
+      height: fit-content;
+      width: fit-content;
+      font-size: 1rem;
+    }
+  }
 `;
 const Title: React.FC = () => {
   return (
