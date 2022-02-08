@@ -14,8 +14,8 @@ const Grid = styled.div<{ columns: number }>`
     grid-template-rows: repeat(auto-fill, 60px);
     grid-template-columns: repeat(auto-fill, 60px);
     grid-auto-columns: 100px;
-    grid-auto-rows: 100px;
-    height: 100vh; /* NEW */
+    grid-auto-rows: 60px;
+    height: fit-content; /* NEW */
     width: 100%;
   }
 `;

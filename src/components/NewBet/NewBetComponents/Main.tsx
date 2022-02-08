@@ -54,6 +54,12 @@ const StyledMain = styled.main`
     width: 90%;
   }
 
+  @media (max-width: 1000px) {
+    padding: 1rem 6rem;
+    ${Button} {
+      padding: 0.5rem;
+    }
+  }
   @media (max-width: 700px) {
     padding: 0.5rem 1rem;
     width: 93vw;
@@ -63,6 +69,7 @@ const StyledMain = styled.main`
     }
     ${Button} {
       font-size: 0.7rem;
+      padding: 1rem 2rem;
     }
     ${SelectorButton} {
       margin: auto;
