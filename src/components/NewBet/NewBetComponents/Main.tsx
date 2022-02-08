@@ -75,6 +75,11 @@ const StyledMain = styled.main`
       margin: auto;
     }
   }
+  @media (max-width: 500px) {
+    ${H1} {
+      display: none;
+    }
+  }
 `;
 const NewBetContainer = styled.div`
   display: flex;
