@@ -8,10 +8,21 @@ const Grid = styled.div<{ columns: number }>`
   column-gap: 0.2rem;
   width: fit-content;
   margin-bottom: 1rem;
+
+  @media (max-width: 700px) {
+    grid-auto-flow: row;
+    grid-template-rows: repeat(auto-fill, 60px);
+    grid-template-columns: repeat(auto-fill, 60px);
+    grid-auto-columns: 100px;
+    grid-auto-rows: 60px;
+    height: fit-content; /* NEW */
+    width: 100%;
+  }
 `;
 const ScrollableGridContainer = styled.div<{ color: string }>`
   height: 35vh;
   overflow-y: auto;
+
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -27,6 +38,10 @@ const ScrollableGridContainer = styled.div<{ color: string }>`
     border-radius: 10px;
   }
   margin-bottom: 0.5rem;
+
+  @media (max-width: 700px) {
+    height: 30vh;
+  }
 `;
 const NumberGrid = (props: {
   color: string;

@@ -22,6 +22,17 @@ const StyledHeader = styled.header`
     margin-right: 8rem;
     margin-left: 3rem;
   }
+
+  @media (max-width: 700px) {
+    padding-left: 10px;
+    justify-content: space-around;
+    ${TextButtonStyles} {
+      margin: 10px;
+    }
+    ${TextButtonStyles}:last-child {
+      margin: 0;
+    }
+  }
 `;
 
 const HeaderLogo = styled.h1`

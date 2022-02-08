@@ -15,10 +15,18 @@ export default styled.button<StyledButtonProps>`
   border-radius: 1rem;
   padding: 0.5rem 1.5rem;
   margin: auto 0.7rem;
-
+  white-space: nowrap;
   &:hover {
     cursor: pointer;
     background-color: ${(props) => props.color};
     color: snow;
+  }
+
+  @media (max-width: 700px) {
+    margin: auto;
+    width: fit-content;
+  }
+  @media (max-width: 500px) {
+    margin: auto 0.2rem;
   }
 `;

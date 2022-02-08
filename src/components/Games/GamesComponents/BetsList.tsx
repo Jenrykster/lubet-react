@@ -36,6 +36,12 @@ const ScrollableColumn = styled(Column)`
     background: #b5c401aa;
     border-radius: 10px;
   }
+
+  @media (max-width: 700px) {
+    height: 55vh;
+    width: 95%;
+    margin-top: 1rem;
+  }
 `;
 
 const BetsList = (props: { bets: BetType[] }) => {

@@ -13,6 +13,11 @@ const NumberButtonStyles = styled.div<{ active?: boolean; color: string }>`
     cursor: pointer;
     background-color: ${(props) => (props.active ? props.color : '#a2b4b8')};
   }
+
+  @media (max-width: 700px) {
+    font-size: 1.3rem;
+    padding: 1rem 1.5rem;
+  }
 `;
 const NumberButton = (props: {
   active?: boolean;

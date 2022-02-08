@@ -11,6 +11,18 @@ const SelectorButtonContainer = styled(Row)`
   ${SelectorButton}:first-child {
     margin-left: 0;
   }
+
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    overflow-x: auto;
+
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
+    }
+  }
 `;
 const GameSelector = (props: { required?: boolean }) => {
   const dispatch = useDispatch();

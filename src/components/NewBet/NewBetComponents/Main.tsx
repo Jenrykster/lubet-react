@@ -9,9 +9,28 @@ import GameSelector from '../../shared/GameSelector';
 import Button from '../../shared/Primitives/Button';
 import H1 from '../../shared/Primitives/H1';
 import Row from '../../shared/Primitives/Row';
+import SelectorButton from '../../shared/SelectorButton';
 import AddToCartButton from './AddToCartButton';
 import NumberGrid from './NumberGrid';
 
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 700px) {
+    flex-direction: column-reverse;
+    align-items: center;
+
+    ${Row} {
+      margin-top: 0.3rem;
+      justify-content: center;
+
+      ${Button}:first-child {
+        margin-right: 0rem;
+      }
+    }
+  }
+`;
 const GameDescription = styled.p`
   font-size: 0.8em;
   font-style: italic;
@@ -33,6 +52,28 @@ const StyledMain = styled.main`
   }
   ${Row} {
     width: 90%;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 1rem 6rem;
+    ${Button} {
+      padding: 0.5rem;
+    }
+  }
+  @media (max-width: 700px) {
+    padding: 0.5rem 1rem;
+    width: 93vw;
+    text-align: center;
+    ${Row} {
+      width: 100%;
+    }
+    ${Button} {
+      font-size: 0.7rem;
+      padding: 1rem 2rem;
+    }
+    ${SelectorButton} {
+      margin: auto;
+    }
   }
 `;
 const NewBetContainer = styled.div`
@@ -150,7 +191,7 @@ const Main = () => {
           color={selectedGame?.color || 'black'}
           range={selectedGame?.range || 36}
         />
-        <Row>
+        <ButtonContainer>
           <Row>
             <Button onClick={generateRandomNumbers}>Complete Game</Button>
             <Button onClick={clearNumbers}>Clear Game</Button>
@@ -158,7 +199,7 @@ const Main = () => {
           <AddToCartButton
             onClick={() => addSelectedNumbersToCart(selectedNumbers)}
           />
-        </Row>
+        </ButtonContainer>
       </StyledMain>
       <Cart />
     </NewBetContainer>

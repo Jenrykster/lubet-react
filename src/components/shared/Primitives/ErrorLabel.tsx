@@ -16,4 +16,10 @@ export default styled.label`
       opacity: 100%;
     }
   }
+
+  @media (max-width: 700px) {
+    font-size: 0.8rem;
+    margin-bottom: -10px;
+    margin-top: 5px;
+  }
 `;
