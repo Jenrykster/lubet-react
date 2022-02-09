@@ -44,6 +44,7 @@ const TextButton = (props: {
   arrow?: boolean;
   arrowLeft?: boolean;
   style?: React.CSSProperties;
+  'data-cy'?: string;
   onClick?: () => void;
 }) => {
   const buttonProps = {
@@ -56,6 +57,7 @@ const TextButton = (props: {
       {...buttonProps}
       style={props.style || {}}
       onClick={props.onClick}
+      data-cy={props['data-cy']}
     >
       {props.arrowLeft && <ArrowLeft />}
       {props.text}

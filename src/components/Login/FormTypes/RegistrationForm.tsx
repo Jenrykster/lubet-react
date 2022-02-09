@@ -67,10 +67,15 @@ const RegistrationForm = () => {
             placeholder='Password'
             {...register('password')}
           />
-          <TextButton primary text='Register' arrow />
+          <TextButton data-cy='sign-up-btn' primary text='Register' arrow />
         </Card>
       </form>
-      <TextButton arrowLeft text='Back' onClick={() => navigate('/')} />
+      <TextButton
+        data-cy='back-btn'
+        arrowLeft
+        text='Back'
+        onClick={() => navigate('/')}
+      />
     </TransitionPage>
   );
 };

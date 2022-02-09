@@ -43,10 +43,15 @@ const ResetPassword = () => {
             placeholder='Email'
             {...register('email')}
           />
-          <TextButton primary text='Send link' arrow />
+          <TextButton data-cy='send-link-btn' primary text='Send link' arrow />
         </Card>
       </form>
-      <TextButton arrowLeft text='Back' onClick={() => navigate('/')} />
+      <TextButton
+        data-cy='back-btn'
+        arrowLeft
+        text='Back'
+        onClick={() => navigate('/')}
+      />
     </TransitionPage>
   );
 };

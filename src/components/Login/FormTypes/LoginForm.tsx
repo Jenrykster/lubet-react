@@ -88,11 +88,14 @@ const LoginForm = () => {
             {...register('password')}
           />
           <TextLink>
-            <Link to='/reset'>I forgot my password</Link>
+            <Link data-cy='reset-password-btn' to='/reset'>
+              I forgot my password
+            </Link>
           </TextLink>
-          <TextButton primary text='Log in' arrow />
+          <TextButton data-cy='login-btn' primary text='Log in' arrow />
         </Card>
         <TextButton
+          data-cy='sign-up-btn'
           text='Sign Up'
           arrow
           onClick={() => navigate('/register')}
