@@ -73,7 +73,12 @@ const Header = (props: { showHomeButton?: boolean }) => {
       </Row>
       <Row>
         <TextButton text='Account' />
-        <TextButton text='Sign out' arrow onClick={logoutHandler} />
+        <TextButton
+          data-cy='logout-btn'
+          text='Sign out'
+          arrow
+          onClick={logoutHandler}
+        />
       </Row>
     </StyledHeader>
   );
