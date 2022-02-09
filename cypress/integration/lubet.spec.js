@@ -13,7 +13,7 @@ function generateEmail(length) {
 }
 
 describe('Lubet test', () => {
-  it('Creates an user', () => {
+  it.skip('Creates an user', () => {
     cy.visit('http://localhost:3000/register');
     cy.get('[data-cy=name]').focus().type('Nome de Alguém');
     cy.get('[data-cy=email]').focus().type(generateEmail(6));
@@ -31,6 +31,40 @@ describe('Lubet test', () => {
       expect(xhr.response.body.user).is.not.null;
       expect(xhr.response.body).has.property('token');
       expect(xhr.response.body.token.token).is.not.null;
+    });
+  });
+
+  it('Logins an user', () => {
+    cy.login('test@email.com', '123456');
+  });
+
+  it('Logouts an user', () => {
+    cy.login('test@email.com', '123456');
+    cy.get('.swal2-confirm').click();
+    cy.get('[data-cy=logout-btn]').click();
+    cy.visit('http://localhost:3000/games');
+    cy.location().should((location) => {
+      expect(location.pathname).be.eq('/');
+    });
+  });
+
+  it('Resets a password', () => {
+    cy.visit('http://localhost:3000/reset');
+    cy.get('[data-cy=email]').focus().type('test@email.com');
+
+    cy.server();
+    cy.route('POST', '**/reset').as('postPasswordReset');
+
+    cy.get('[data-cy=send-link-btn]').click();
+
+    cy.wait('@postPasswordReset').then((xhr) => {
+      expect(xhr.status).be.eq(200);
+      expect(xhr.response.body).has.property('email');
+      expect(xhr.response.body.user).is.not.null;
+      expect(xhr.response.body).has.property('id');
+      expect(xhr.response.body.id).is.not.null;
+      expect(xhr.response.body).has.property('token');
+      expect(xhr.response.body.token).is.not.null;
     });
   });
 });
