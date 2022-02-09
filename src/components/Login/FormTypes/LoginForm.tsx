@@ -72,11 +72,17 @@ const LoginForm = () => {
           {errors.email && (
             <ErrorLabel htmlFor='email'>{errors.email.message}</ErrorLabel>
           )}
-          <Input type='text' placeholder='Email' {...register('email')} />
+          <Input
+            data-cy='email'
+            type='text'
+            placeholder='Email'
+            {...register('email')}
+          />
           {errors.password && (
             <ErrorLabel htmlFor='password'>min password length is 6</ErrorLabel>
           )}
           <Input
+            data-cy='password'
             type='password'
             placeholder='Password'
             {...register('password')}

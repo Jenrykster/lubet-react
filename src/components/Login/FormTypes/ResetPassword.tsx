@@ -37,7 +37,12 @@ const ResetPassword = () => {
           {errors.email && (
             <ErrorLabel htmlFor='email'>{errors.email.message}</ErrorLabel>
           )}
-          <Input type='email' placeholder='Email' {...register('email')} />
+          <Input
+            data-cy='email'
+            type='email'
+            placeholder='Email'
+            {...register('email')}
+          />
           <TextButton primary text='Send link' arrow />
         </Card>
       </form>
