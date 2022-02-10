@@ -3,16 +3,15 @@ import Input from '../../shared/Primitives/Input';
 import ErrorLabel from '../../shared/Primitives/ErrorLabel';
 import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/Primitives/BoldText';
-import { useNavigate } from 'react-router-dom';
 import TransitionPage from '../../shared/Utils/TransitionPage';
 import { resetPassword } from '../../../auth/auth';
 import resetPasswordSchema from '../../../auth/schemas/resetPassword';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Swal from 'sweetalert2';
+import BackButton from '../LoginComponents/BackButton';
 
 const ResetPassword = () => {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -46,12 +45,7 @@ const ResetPassword = () => {
           <TextButton data-cy='send-link-btn' primary text='Send link' arrow />
         </Card>
       </form>
-      <TextButton
-        data-cy='back-btn'
-        arrowLeft
-        text='Back'
-        onClick={() => navigate('/')}
-      />
+      <BackButton />
     </TransitionPage>
   );
 };

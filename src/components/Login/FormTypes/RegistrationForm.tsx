@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from '../../../auth/schemas/register';
 import ErrorLabel from '../../shared/Primitives/ErrorLabel';
+import BackButton from '../LoginComponents/BackButton';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -70,12 +71,7 @@ const RegistrationForm = () => {
           <TextButton data-cy='sign-up-btn' primary text='Register' arrow />
         </Card>
       </form>
-      <TextButton
-        data-cy='back-btn'
-        arrowLeft
-        text='Back'
-        onClick={() => navigate('/')}
-      />
+      <BackButton />
     </TransitionPage>
   );
 };
