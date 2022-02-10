@@ -1,5 +1,4 @@
 import Card from '../../shared/Primitives/Card';
-import Input from '../../shared/Primitives/Input';
 import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/Primitives/BoldText';
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +8,9 @@ import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from '../../../auth/schemas/register';
-import ErrorLabel from '../../shared/Primitives/ErrorLabel';
 import BackButton from '../LoginComponents/BackButton';
+import FormInput from '../LoginComponents/FormInput';
+import { InputTypes } from '../../../shared/interfaces';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -31,42 +31,28 @@ const RegistrationForm = () => {
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
     navigate('/');
   };
-  console.log(errors.name);
+  console.log(errors);
   return (
     <TransitionPage>
       <BoldText>Registration</BoldText>
       <form onSubmit={handleSubmit(registerUser)}>
         <Card>
-          {errors.name && (
-            <ErrorLabel htmlFor='name'>
-              {errors.name.type === 'matches'
-                ? errors.name.message
-                : 'min name length is 2'}
-            </ErrorLabel>
-          )}
-          <Input
-            data-cy='name'
-            type='text'
-            placeholder='Name'
-            {...register('name')}
+          <FormInput
+            errors={errors}
+            register={register}
+            inputName={InputTypes.name}
           />
-          {errors.email && (
-            <ErrorLabel htmlFor='email'>{errors.email.message}</ErrorLabel>
-          )}
-          <Input
-            data-cy='email'
-            type='email'
-            placeholder='Email'
-            {...register('email')}
+          <FormInput
+            inputName={InputTypes.email}
+            errors={errors}
+            register={register}
           />
-          {errors.password && (
-            <ErrorLabel htmlFor='password'>min password length is 6</ErrorLabel>
-          )}
-          <Input
-            data-cy='password'
-            type='password'
-            placeholder='Password'
-            {...register('password')}
+          <FormInput
+            inputName={InputTypes.password}
+            errors={errors}
+            register={register}
+            defaultError='min password length is 6'
+            password
           />
           <TextButton data-cy='sign-up-btn' primary text='Register' arrow />
         </Card>

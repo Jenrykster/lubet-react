@@ -1,9 +1,7 @@
 import Card from '../../shared/Primitives/Card';
-import Input from '../../shared/Primitives/Input';
-import TextLink from '../../shared/Primitives/Text';
 import TextButton from '../../shared/TextButton';
 import BoldText from '../../shared/Primitives/BoldText';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import TransitionPage from '../../shared/Utils/TransitionPage';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
@@ -12,9 +10,11 @@ import { RootState } from '../../../store/store';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginSchema from '../../../auth/schemas/login';
-import ErrorLabel from '../../shared/Primitives/ErrorLabel';
 import { login } from '../../../auth/auth';
 import { loginUser } from '../../../store/slices/userSlice';
+import FormInput from '../LoginComponents/FormInput';
+import { InputTypes } from '../../../shared/interfaces';
+import ResetPasswordLink from '../LoginComponents/ResetPasswordLink';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -63,35 +63,24 @@ const LoginForm = () => {
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
     navigate('/games');
   };
-
   return (
     <TransitionPage>
       <BoldText>Authentication</BoldText>
       <form onSubmit={handleSubmit(authenticate)}>
         <Card>
-          {errors.email && (
-            <ErrorLabel htmlFor='email'>{errors.email.message}</ErrorLabel>
-          )}
-          <Input
-            data-cy='email'
-            type='text'
-            placeholder='Email'
-            {...register('email')}
+          <FormInput
+            inputName={InputTypes.email}
+            errors={errors}
+            register={register}
           />
-          {errors.password && (
-            <ErrorLabel htmlFor='password'>min password length is 6</ErrorLabel>
-          )}
-          <Input
-            data-cy='password'
-            type='password'
-            placeholder='Password'
-            {...register('password')}
+          <FormInput
+            inputName={InputTypes.password}
+            errors={errors}
+            register={register}
+            defaultError='min password length is 6'
+            password
           />
-          <TextLink>
-            <Link data-cy='reset-password-btn' to='/reset'>
-              I forgot my password
-            </Link>
-          </TextLink>
+          <ResetPasswordLink />
           <TextButton data-cy='login-btn' primary text='Log in' arrow />
         </Card>
         <TextButton
