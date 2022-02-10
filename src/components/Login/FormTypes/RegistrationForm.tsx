@@ -24,7 +24,7 @@ const RegistrationForm = () => {
     const response = await createUser(name, email, password);
     const icon = response && response.status === 200 ? 'success' : 'error';
     const errorMessage =
-      (response && response.data.message) || 'There was an error !';
+      (response && response.data.error?.message) || 'There was an error !';
     const title =
       icon === 'success' ? 'Registrado com sucesso!' : errorMessage || 'Error';
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
