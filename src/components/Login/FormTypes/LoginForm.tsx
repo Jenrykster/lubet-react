@@ -1,10 +1,7 @@
 import Card from '../../shared/Primitives/Card';
 import TextButton from '../../shared/TextButton';
-import BoldText from '../../shared/Primitives/BoldText';
 import { useNavigate } from 'react-router-dom';
-import TransitionPage from '../../shared/Utils/TransitionPage';
 import { useEffect } from 'react';
-import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { useForm } from 'react-hook-form';
@@ -13,8 +10,10 @@ import loginSchema from '../../../auth/schemas/login';
 import { login } from '../../../auth/auth';
 import { loginUser } from '../../../store/slices/userSlice';
 import FormInput from '../LoginComponents/FormInput';
-import { InputTypes } from '../../../shared/interfaces';
+import { IData, InputTypes } from '../../../shared/interfaces';
 import ResetPasswordLink from '../LoginComponents/ResetPasswordLink';
+import FormWrapper from '../LoginComponents/FormWrapper';
+import useUserRequest from '../../../hooks/useUserRequest';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -23,6 +22,10 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
+  const requestUserLogin = useUserRequest(login, {
+    route: '/games',
+    message: 'Logged in successfully',
+  });
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -33,40 +36,28 @@ const LoginForm = () => {
     }
   }, [navigate, isLoggedIn]);
 
-  const authenticate = async (data: any) => {
-    const { email, password } = data;
-    if (isLoggedIn) {
-      Swal.fire("You're already logged in!", '', 'info');
-      navigate('/games');
-      return;
-    }
-    const response = await login(email, password);
+  const onLoginSuccess = (response: IData) => {
     if (
-      response &&
-      response.status === 200 &&
-      response.data.user &&
-      response.data.token
+      response.user &&
+      response.token &&
+      typeof response.token !== 'string' &&
+      'token' in response.token
     ) {
       const userData = {
-        email: response.data.user.email,
-        name: response.data.user.name,
-        isAdmin: response.data.user.isAdmin,
-        token: response.data.token.token,
+        email: response.user.email,
+        name: response.user.name,
+        isAdmin: response.user.isAdmin,
+        token: response.token.token,
       };
       dispatch(loginUser(userData));
       localStorage.setItem('userData', JSON.stringify(userData));
     }
-    const icon = response && response.status === 200 ? 'success' : 'error';
-    const errorMessage =
-      (response && response.data.message) || 'There was an error !';
-    const title = icon === 'success' ? 'Logado com sucesso!' : errorMessage;
-    Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
-    navigate('/games');
   };
+  requestUserLogin.appendOnSuccess(onLoginSuccess);
+
   return (
-    <TransitionPage>
-      <BoldText>Authentication</BoldText>
-      <form onSubmit={handleSubmit(authenticate)}>
+    <FormWrapper title='Authenticate'>
+      <form onSubmit={handleSubmit(requestUserLogin.fire)}>
         <Card>
           <FormInput
             inputName={InputTypes.email}
@@ -90,7 +81,7 @@ const LoginForm = () => {
           onClick={() => navigate('/register')}
         />
       </form>
-    </TransitionPage>
+    </FormWrapper>
   );
 };
 

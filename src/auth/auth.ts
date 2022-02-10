@@ -1,38 +1,15 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
-
+import { IFormData, IResponse } from '../shared/interfaces';
 const api = axios.create({
   baseURL: 'http://127.0.0.1:3333',
   headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
 });
 
-interface Data {
-  message?: string;
-  user?: User;
-  token?: Token;
-  error?: { message: string };
-}
-interface Token {
-  token: string;
-  expires_at: string;
-}
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  isAdmin: number;
-  token: string;
-}
-
-interface Response {
-  status: number;
-  data: Data;
-}
-
 const request = async (
   method: Method,
   url: string,
   data: object
-): Promise<Response> => {
+): Promise<IResponse> => {
   const options: AxiosRequestConfig = {
     method,
     url,
@@ -49,21 +26,20 @@ const request = async (
   return response;
 };
 
-export const login = async (
-  email: string,
-  password: string
-): Promise<Response> => {
-  return await request('POST', 'login', { email, password });
+export const login = async (data: IFormData): Promise<IResponse> => {
+  return await request('POST', 'login', data);
 };
 
-export const createUser = async (
-  name: string,
-  email: string,
-  password: string
-): Promise<Response> => {
-  return await request('POST', 'user/create', { name, email, password });
+export const createUser = async (data: IFormData): Promise<IResponse> => {
+  return await request('POST', 'user/create', data);
 };
 
-export const resetPassword = async (email: string): Promise<Response> => {
-  return await request('POST', 'reset', { email });
+export const resetPassword = async (data: IFormData): Promise<IResponse> => {
+  return await request('POST', 'reset', data);
+};
+
+export const changePassword = async (data: IFormData): Promise<IResponse> => {
+  return await request('POST', `reset/${data.token}`, {
+    password: data.password,
+  });
 };

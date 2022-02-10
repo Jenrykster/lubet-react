@@ -1,15 +1,15 @@
 import Card from '../../shared/Primitives/Card';
 import TextButton from '../../shared/TextButton';
-import BoldText from '../../shared/Primitives/BoldText';
-import TransitionPage from '../../shared/Utils/TransitionPage';
-import { resetPassword } from '../../../auth/auth';
+import { changePassword, resetPassword } from '../../../auth/auth';
 import resetPasswordSchema from '../../../auth/schemas/resetPassword';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Swal from 'sweetalert2';
 import BackButton from '../LoginComponents/BackButton';
 import FormInput from '../LoginComponents/FormInput';
-import { InputTypes } from '../../../shared/interfaces';
+import { IData, InputTypes } from '../../../shared/interfaces';
+import useUserRequest from '../../../hooks/useUserRequest';
+import FormWrapper from '../LoginComponents/FormWrapper';
+import { useState } from 'react';
 
 const ResetPassword = () => {
   const {
@@ -18,31 +18,63 @@ const ResetPassword = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(resetPasswordSchema) });
 
-  const resetPasswordHandler = async (data: any) => {
-    const { email } = data;
-    const response = await resetPassword(email);
-    const icon = response.status === 200 ? 'success' : 'error';
-    const title =
-      icon === 'success'
-        ? 'Email de recuperação enviado'
-        : 'Email não encontrado';
-    Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
-  };
+  const [canChangePassword, setCanChangePassword] = useState(false);
+  const [newPasswordToken, setNewPasswordToken] = useState('');
+
+  const requestPasswordReset = useUserRequest(resetPassword, {
+    route: '',
+    message: 'Reset email sent successfully',
+  });
+  requestPasswordReset.appendOnSuccess((response: IData) => {
+    setCanChangePassword(true);
+    setNewPasswordToken(
+      typeof response.token === 'string' ? response.token : ''
+    );
+  });
+
+  const requestNewPassword = useUserRequest(
+    changePassword,
+    {
+      route: '/',
+      message: 'Changed Password',
+    },
+    newPasswordToken
+  );
+
+  const requestPasswordChangeForm = (
+    <form onSubmit={handleSubmit(requestPasswordReset.fire)}>
+      <Card>
+        <FormInput
+          inputName={InputTypes.email}
+          errors={errors}
+          register={register}
+        />
+        <TextButton data-cy='send-link-btn' primary text='Send link' arrow />
+      </Card>
+    </form>
+  );
+
+  const changePasswordForm = (
+    <form onSubmit={handleSubmit(requestNewPassword.fire)}>
+      <Card>
+        <FormInput
+          inputName={InputTypes.password}
+          errors={errors}
+          register={register}
+          customPlaceholder='New Password'
+          password
+        />
+        <TextButton data-cy='send-link-btn' primary text='Reset' arrow />
+      </Card>
+    </form>
+  );
+  console.log(canChangePassword);
   return (
-    <TransitionPage>
-      <BoldText>Reset Password</BoldText>
-      <form onSubmit={handleSubmit(resetPasswordHandler)}>
-        <Card>
-          <FormInput
-            inputName={InputTypes.email}
-            errors={errors}
-            register={register}
-          />
-          <TextButton data-cy='send-link-btn' primary text='Send link' arrow />
-        </Card>
-      </form>
+    <FormWrapper title='Reset Password'>
+      {!canChangePassword && requestPasswordChangeForm}
+      {canChangePassword && changePasswordForm}
       <BackButton />
-    </TransitionPage>
+    </FormWrapper>
   );
 };
 

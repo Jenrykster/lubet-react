@@ -1,6 +1,6 @@
 import Centered from '../shared/Primitives/Centered';
-import Form from './Form';
-import Title from './Title';
+import Form from './LoginComponents/FormRoutes';
+import Title from './LoginComponents/Title';
 
 const Login: React.FC = () => {
   return (

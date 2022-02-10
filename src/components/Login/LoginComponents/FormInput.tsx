@@ -10,6 +10,7 @@ const FormInput = (props: {
   register: UseFormRegister<FieldValues>;
   inputName: InputTypes;
   defaultError?: string;
+  customPlaceholder?: string;
   password?: boolean;
 }) => {
   return (
@@ -24,7 +25,9 @@ const FormInput = (props: {
       <Input
         data-cy={props.inputName}
         type={props.password ? 'password' : 'text'}
-        placeholder={capitalizeFirstLetter(props.inputName)}
+        placeholder={
+          props.customPlaceholder || capitalizeFirstLetter(props.inputName)
+        }
         {...props.register(props.inputName)}
       />
     </React.Fragment>
