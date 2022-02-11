@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Games from './components/Games/Games';
-import Login from './components/Login/Login';
+import Login from './pages/Login';
 import NewBet from './components/NewBet/NewBet';
 import Footer from './components/shared/Footer';
 import LoginCheck from './components/shared/Utils/LoginCheck';

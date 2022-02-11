@@ -4,14 +4,14 @@ import { changePassword, resetPassword } from '../../../auth/auth';
 import resetPasswordSchema from '../../../auth/schemas/resetPassword';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import BackButton from '../LoginComponents/BackButton';
-import FormInput from '../LoginComponents/FormInput';
+import BackButton from '../BackButton';
+import FormInput from '../FormInput';
 import { IData, InputTypes } from '../../../shared/interfaces';
 import useUserRequest from '../../../hooks/useUserRequest';
-import FormWrapper from '../LoginComponents/FormWrapper';
+import FormWrapper from '../FormWrapper';
 import { useState } from 'react';
 
-const ResetPassword = () => {
+const ResetPasswordForm = () => {
   const {
     register,
     handleSubmit,
@@ -78,4 +78,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordForm;

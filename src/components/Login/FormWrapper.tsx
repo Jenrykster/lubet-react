@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import BoldText from '../../shared/Primitives/BoldText';
-import TransitionPage from '../../shared/Utils/TransitionPage';
+import BoldText from '../shared/Primitives/BoldText';
+import TransitionPage from '../shared/Utils/TransitionPage';
 
 const FormWrapper = (props: { title: string; children?: ReactNode }) => {
   return (
