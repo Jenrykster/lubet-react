@@ -9,10 +9,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import loginSchema from '../../../auth/schemas/login';
 import { login } from '../../../auth/auth';
 import { loginUser } from '../../../store/slices/userSlice';
-import FormInput from '../LoginComponents/FormInput';
+import FormInput from '../FormInput';
 import { IData, InputTypes } from '../../../shared/interfaces';
-import ResetPasswordLink from '../LoginComponents/ResetPasswordLink';
-import FormWrapper from '../LoginComponents/FormWrapper';
+import ResetPasswordLink from '../ResetPasswordLink';
+import FormWrapper from '../FormWrapper';
 import useUserRequest from '../../../hooks/useUserRequest';
 
 const LoginForm = () => {
