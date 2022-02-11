@@ -1,9 +1,6 @@
-import axios, { AxiosRequestConfig, Method } from 'axios';
-import { IFormData, IResponse } from '../shared/interfaces';
-const api = axios.create({
-  baseURL: 'http://127.0.0.1:3333',
-  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-});
+import { AxiosRequestConfig, Method } from 'axios';
+import { IFormData, IResponse } from '../../interfaces';
+import api from '../axios.config';
 
 const request = async (
   method: Method,

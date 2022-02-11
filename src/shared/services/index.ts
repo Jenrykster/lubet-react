@@ -1,3 +1,3 @@
-export { default as getBets } from './getBets';
-export { default as getGames } from './getGames';
-export { default as postBets } from './postBets';
+export { default as getBets } from './bets/getBets';
+export { default as getGames } from './games/getGames';
+export { default as postBets } from './bets/postBets';

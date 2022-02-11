@@ -1,7 +1,10 @@
 import Card from '../../shared/Primitives/Card';
 import TextButton from '../../shared/TextButton';
-import { changePassword, resetPassword } from '../../../auth/auth';
-import resetPasswordSchema from '../../../auth/schemas/resetPassword';
+import {
+  changePassword,
+  resetPassword,
+} from '../../../shared/services/auth/auth';
+import resetPasswordSchema from '../../../schemas/resetPassword';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BackButton from '../BackButton';

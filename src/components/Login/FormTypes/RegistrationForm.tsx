@@ -1,9 +1,9 @@
 import Card from '../../shared/Primitives/Card';
 import TextButton from '../../shared/TextButton';
-import { createUser } from '../../../auth/auth';
+import { createUser } from '../../../shared/services/auth/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import registerSchema from '../../../auth/schemas/register';
+import registerSchema from '../../../schemas/register';
 import BackButton from '../BackButton';
 import FormInput from '../FormInput';
 import { InputTypes } from '../../../shared/interfaces';

@@ -1,9 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-
-const api = axios.create({
-  baseURL: 'http://127.0.0.1:3333',
-  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-});
+import api from '../axios.config';
 
 const getGames = async () => {
   let response: AxiosResponse | Error;
