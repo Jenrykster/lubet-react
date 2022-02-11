@@ -6,14 +6,14 @@ import {
   changeSelectedGame,
   GameType,
   updateGames,
-} from '../../store/slices/gamesSlice';
-import { RootState } from '../../store/store';
-import getBets from '../../utils/getBets';
-import getGames from '../../utils/getGames';
-import ErrorMessage from '../shared/ErrorMessage';
-import Header from '../shared/Header';
-import Centered from '../shared/Primitives/Centered';
-import Main from './GamesComponents/Main';
+} from '../store/slices/gamesSlice';
+import { RootState } from '../store/store';
+import getBets from '../utils/getBets';
+import getGames from '../utils/getGames';
+import ErrorMessage from '../components/shared/ErrorMessage';
+import Header from '../components/shared/Header';
+import Centered from '../components/shared/Primitives/Centered';
+import { Main } from '../components/Games/';
 
 const Games = () => {
   const [isLoading, setIsLoading] = useState(false);

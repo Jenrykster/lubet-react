@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { RootState } from '../../../store/store';
-import Column from '../../shared/Primitives/Column';
-import H1 from '../../shared/Primitives/H1';
+import { RootState } from '../../store/store';
+import Column from '../shared/Primitives/Column';
+import H1 from '../shared/Primitives/H1';
 import GameContainer from './GameContainer';
 
 export type BetType = {
