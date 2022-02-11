@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import { postBets } from '../../shared/services';
 import { MdOutlineShoppingCart } from 'react-icons/md';
+import { formatCurrency } from '../../shared/utils';
 
 const Backdrop = styled.div`
   background: rgba(0, 0, 0, 0.5);
@@ -150,11 +151,7 @@ const Cart = () => {
     if (cartTotalPrice < 30) {
       Swal.fire(
         'Add more bets to your cart',
-        `The minimum cart price is ${minimumCartPrice.toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          style: 'currency',
-          currency: 'BRL',
-        })}`,
+        `The minimum cart price is ${formatCurrency(minimumCartPrice)}`,
         'error'
       );
     } else {
@@ -204,12 +201,7 @@ const Cart = () => {
         {cartItems.length === 0 && <EmptyCartMessage />}
         <H1>
           <b>CART </b>
-          TOTAL:{' '}
-          {cartTotalPrice.toLocaleString('pt-BR', {
-            minimumFractionDigits: 2,
-            style: 'currency',
-            currency: 'BRL',
-          })}
+          TOTAL: {formatCurrency(cartTotalPrice)}
         </H1>
         <TextButton onClick={saveBets} text='Save' arrow />
       </CartContainer>

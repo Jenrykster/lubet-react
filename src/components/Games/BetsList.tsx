@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { formatCurrency } from '../../shared/utils';
 import { RootState } from '../../store/store';
 import Column from '../shared/Primitives/Column';
 import H1 from '../shared/Primitives/H1';
@@ -58,11 +59,7 @@ const BetsList = (props: { bets: BetType[] }) => {
             .split(',')
             .map((numberString) => parseInt(numberString))}
           gameName={bet.type.type}
-          price={bet.price.toLocaleString('pt-BR', {
-            minimumFractionDigits: 2,
-            style: 'currency',
-            currency: 'BRL',
-          })}
+          price={formatCurrency(bet.price)}
           date={new Date(bet.created_at).toLocaleDateString()}
         />
       );

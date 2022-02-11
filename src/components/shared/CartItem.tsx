@@ -2,6 +2,7 @@ import { IoIosTrash } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
+import { formatCurrency } from '../../shared/utils';
 import { deleteCartItem } from '../../store/slices/cartSlice';
 import Aligned from './Primitives/Aligned';
 import P from './Primitives/P';
@@ -90,13 +91,7 @@ const CartItem = (props: {
         <P>{props.numbers.join(', ')}</P>
         <Row>
           <h4>{props.gameType}</h4>
-          <p>
-            {props.price.toLocaleString('pt-BR', {
-              minimumFractionDigits: 2,
-              style: 'currency',
-              currency: 'BRL',
-            })}
-          </p>
+          <p>{formatCurrency(props.price)}</p>
         </Row>
       </CartDataContainer>
     </CartItemContainer>
