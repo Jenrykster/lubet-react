@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { store } from '../store/store';
+import { store } from '../../store/store';
 
 let token: string;
 let api: AxiosInstance;

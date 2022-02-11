@@ -8,8 +8,7 @@ import {
   updateGames,
 } from '../store/slices/gamesSlice';
 import { RootState } from '../store/store';
-import getBets from '../utils/getBets';
-import getGames from '../utils/getGames';
+import { getBets, getGames } from '../shared/services';
 import ErrorMessage from '../components/shared/ErrorMessage';
 import Header from '../components/shared/Header';
 import Centered from '../components/shared/Primitives/Centered';

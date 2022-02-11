@@ -9,7 +9,7 @@ import TextButton, { TextButtonStyles } from './TextButton';
 import EmptyCartMessage from './EmptyCartMessage';
 import React, { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
-import postBets from '../../utils/postBets';
+import { postBets } from '../../shared/services';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 
 const Backdrop = styled.div`
