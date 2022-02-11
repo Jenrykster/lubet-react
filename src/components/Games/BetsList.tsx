@@ -4,7 +4,7 @@ import { formatCurrency } from '../../shared/utils';
 import { RootState } from '../../store/store';
 import Column from '../shared/Primitives/Column';
 import H1 from '../shared/Primitives/H1';
-import GameContainer from './GameContainer';
+import { GameContainer } from './';
 
 export type BetType = {
   choosen_numbers: string;
