@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Button from '../../shared/Primitives/Button';
+import Button from '../shared/Primitives/Button';
 import { IoMdCart } from 'react-icons/io';
-import Aligned from '../../shared/Primitives/Aligned';
+import Aligned from '../shared/Primitives/Aligned';
 
 export const CartButton = styled(Button)`
   padding: 0.5rem 2rem;

@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import GameSelector from '../../shared/GameSelector';
-import H1 from '../../shared/Primitives/H1';
-import P from '../../shared/Primitives/P';
-import Row from '../../shared/Primitives/Row';
-import TextButton, { TextButtonStyles } from '../../shared/TextButton';
+import GameSelector from '../shared/GameSelector';
+import H1 from '../shared/Primitives/H1';
+import P from '../shared/Primitives/P';
+import Row from '../shared/Primitives/Row';
+import TextButton, { TextButtonStyles } from '../shared/TextButton';
 import BetsList, { BetType } from './BetsList';
 
 const ResponsiveFilter = styled.div`

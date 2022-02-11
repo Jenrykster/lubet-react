@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import NumberButton from './NumberButton';
+import { NumberButton } from './';
 
 const Grid = styled.div<{ columns: number }>`
   display: grid;
