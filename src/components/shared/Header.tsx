@@ -42,6 +42,9 @@ const HeaderLogo = styled.h1`
   margin: 0;
   padding: 10px;
   padding-bottom: 2px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const CurvedUnderline = styled.div`
@@ -64,7 +67,7 @@ const Header = (props: { showHomeButton?: boolean }) => {
     <StyledHeader>
       <Row>
         <Column>
-          <HeaderLogo>TGL</HeaderLogo>
+          <HeaderLogo onClick={() => navigate('/games')}>TGL</HeaderLogo>
           <CurvedUnderline />
         </Column>
         {props.showHomeButton && (
@@ -72,7 +75,7 @@ const Header = (props: { showHomeButton?: boolean }) => {
         )}
       </Row>
       <Row>
-        <TextButton text='Account' />
+        <TextButton text='Account' onClick={() => navigate('/account')} />
         <TextButton
           data-cy='logout-btn'
           text='Sign out'

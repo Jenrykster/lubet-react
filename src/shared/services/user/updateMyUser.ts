@@ -1,15 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
+import { IUserUpdateRequest } from '../../interfaces';
 import api from '../axios.config';
 
-type BetType = {
-  game_id: number;
-  numbers: number[];
-};
-
-const postBets = async (bets: BetType[]) => {
+const updateMyUser = async (data: IUserUpdateRequest) => {
   let response: AxiosResponse | Error;
   try {
-    response = await api.post('/bet/new-bet', { games: bets });
+    response = await api.put('user/update', data);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       response = error.response;
@@ -17,8 +13,7 @@ const postBets = async (bets: BetType[]) => {
       response = new Error('Error while contacting the server');
     }
   }
-
   return response;
 };
 
-export default postBets;
+export default updateMyUser;

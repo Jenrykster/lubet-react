@@ -71,7 +71,7 @@ const ResetPasswordForm = () => {
       </Card>
     </form>
   );
-  console.log(canChangePassword);
+
   return (
     <FormWrapper title='Reset Password'>
       {!canChangePassword && requestPasswordChangeForm}

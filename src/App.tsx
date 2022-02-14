@@ -8,6 +8,7 @@ import NewBet from './pages/NewBet';
 import Footer from './components/shared/Footer';
 import LoginCheck from './components/shared/Utils/LoginCheck';
 import { loginUser, UserState } from './store/slices/userSlice';
+import Account from './pages/Account';
 
 const AppContainer = styled.div`
   color: #707070;
@@ -20,7 +21,6 @@ function App() {
       localStorage.getItem('userData') || '{}'
     );
     if (Object.keys(usrData).length > 0) {
-      console.log('logado');
       dispatch(loginUser(usrData));
     }
   }, [dispatch]);
@@ -34,6 +34,14 @@ function App() {
           element={
             <LoginCheck>
               <Games />
+            </LoginCheck>
+          }
+        />
+        <Route
+          path='/account'
+          element={
+            <LoginCheck>
+              <Account />
             </LoginCheck>
           }
         />
