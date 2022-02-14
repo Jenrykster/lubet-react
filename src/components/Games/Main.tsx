@@ -62,7 +62,7 @@ const Main = (props: { bets: BetType[] }) => {
         </H1>
         <P>Filters</P>
         <Row>
-          <GameSelector />
+          <GameSelector multiselection />
         </Row>
         <TextButton text='New Bet' onClick={() => navigate('/new-bet')} arrow />
       </ResponsiveFilter>

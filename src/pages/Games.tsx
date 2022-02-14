@@ -19,7 +19,7 @@ const Games = () => {
   const [isError, setIsError] = useState(false);
   const [bets, setBets] = useState([]);
   const selectedGameType = useSelector(
-    (state: RootState) => state.games.selectedGame?.type
+    (state: RootState) => state.games.selectedGame
   );
   const dispatch = useDispatch();
 
@@ -52,7 +52,13 @@ const Games = () => {
 
       setIsLoading(false);
 
-      const bets = await getBets(selectedGameType);
+      let gameSelection;
+      if (Array.isArray(selectedGameType)) {
+        gameSelection = selectedGameType.map((game) => game.type);
+      } else {
+        gameSelection = 'type' in selectedGameType! && selectedGameType.type;
+      }
+      const bets = await getBets(gameSelection || '');
       setBets('data' in bets && bets.data);
     }
     getData();

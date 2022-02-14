@@ -103,7 +103,8 @@ const Main = () => {
 
   const numberSelectHandler = (selectedNumber: number) => {
     if (
-      selectedNumbers.length < (selectedGame?.max_number || 0) ||
+      ('max_number' in selectedGame! &&
+        selectedNumbers.length < (selectedGame?.max_number || 0)) ||
       selectedNumbers.includes(selectedNumber)
     ) {
       setSelectedNumbers((prev) => {
@@ -116,7 +117,9 @@ const Main = () => {
     } else {
       Swal.fire(
         "You can't add more numbers!",
-        `The maximum amount of numbers in this game is ${selectedGame?.max_number}`,
+        `The maximum amount of numbers in this game is ${
+          'max_number' in selectedGame! && selectedGame?.max_number
+        }`,
         'warning'
       );
     }
@@ -127,7 +130,7 @@ const Main = () => {
   };
 
   const generateRandomNumbers = () => {
-    if (selectedGame) {
+    if (selectedGame && 'max_number' in selectedGame) {
       let generatedNumbers: number[] = [];
       if (selectedNumbers.length > 0) {
         generatedNumbers = [...selectedNumbers];
@@ -145,7 +148,10 @@ const Main = () => {
     }
   };
   const addSelectedNumbersToCart = (numbers: number[]) => {
-    if (selectedNumbers.length < (selectedGame?.max_number || 0)) {
+    if (
+      'max_number' in selectedGame! &&
+      selectedNumbers.length < (selectedGame?.max_number || 0)
+    ) {
       Swal.fire(
         'Add more numbers',
         `You need to add ${
@@ -158,7 +164,7 @@ const Main = () => {
     const isRepeated = cart.bets.some(
       (cartItem) =>
         cartItem.numbers.toString() === numbers.toString() &&
-        cartItem.gameTypeId === selectedGame?.id
+        cartItem.gameTypeId === ('id' in selectedGame! && selectedGame?.id)
     );
     if (isRepeated) {
       Swal.fire(
@@ -168,7 +174,7 @@ const Main = () => {
       );
       return;
     }
-    if (selectedGame) {
+    if (selectedGame && 'id' in selectedGame) {
       dispatch(
         addToCart({
           numbers,
@@ -184,17 +190,19 @@ const Main = () => {
       <StyledMain>
         <H1>
           <b>NEW BET </b>
-          FOR {selectedGame?.type.toUpperCase()}
+          FOR {'type' in selectedGame! && selectedGame?.type.toUpperCase()}
         </H1>
         <BoldP>Choose a game</BoldP>
         <GameSelector required />
         <BoldP>Fill your bet</BoldP>
-        <GameDescription>{selectedGame?.description}</GameDescription>
+        <GameDescription>
+          {'description' in selectedGame! && selectedGame?.description}
+        </GameDescription>
         <NumberGrid
           onNumberSelect={numberSelectHandler}
           selectedNumbers={selectedNumbers}
-          color={selectedGame?.color || 'black'}
-          range={selectedGame?.range || 36}
+          color={'color' in selectedGame! ? selectedGame.color : 'black'}
+          range={'range' in selectedGame! ? selectedGame?.range : 36}
         />
         <ButtonContainer>
           <Row>
