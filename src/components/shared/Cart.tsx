@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { postBets } from '../../shared/services';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { formatCurrency } from '../../shared/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Backdrop = styled.div`
   background: rgba(0, 0, 0, 0.5);
@@ -118,6 +119,7 @@ export const CartContainer = styled.div<{ hidden: boolean }>`
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const gameTypes = useSelector((state: RootState) => state.games.types);
   const cartItems = useSelector((state: RootState) => state.cart.bets);
   const [showCart, setShowCart] = useState(true);
@@ -161,7 +163,13 @@ const Cart = () => {
       const response = await postBets(mappedCartItems);
       if ('status' in response && response.status === 200) {
         dispatch(clearCart());
-        Swal.fire('Saved !', 'Your bets were saved with success', 'success');
+        Swal.fire(
+          'Saved !',
+          'Your bets were saved with success',
+          'success'
+        ).then(() => {
+          navigate('/games');
+        });
       } else {
         Swal.fire(
           'Sorry !',
