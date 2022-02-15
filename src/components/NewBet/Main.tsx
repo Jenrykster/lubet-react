@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import { addToCart } from '../../store/slices/cartSlice';
 import { RootState } from '../../store/store';
-import Cart from '../shared/Cart';
-import { CartContainer } from '../shared/Cart/styles';
-import GameSelector from '../shared/GameSelector';
-import Button from '../shared/Primitives/Button';
-import H1 from '../shared/Primitives/H1';
-import Row from '../shared/Primitives/Row';
-import { SelectorButton } from '../shared';
+import {
+  Cart,
+  CartContainer,
+  GameSelector,
+  Button,
+  H1,
+  Row,
+  SelectorButton,
+} from '../shared';
 import AddToCartButton from './AddToCartButton';
 import NumberGrid from './NumberGrid';
 

@@ -2,6 +2,7 @@ export * from './Primitives';
 export * from './Utils';
 export { SelectorButton } from './GameSelector/SubComponents';
 export { TextButtonStyles } from './TextButton/styles';
+export { CartContainer } from './Cart/styles';
 export { default as Cart } from './Cart';
 export { default as ErrorMessage } from './ErrorMessage';
 export { default as Footer } from './Footer';
