@@ -1,6 +1,6 @@
 import React from 'react';
-import { Main } from '../components/Account/Main';
-import Header from '../components/shared/Header';
+import { Main } from '@components/Account/Main';
+import { Header } from '@components/shared';
 
 const Account = () => {
   return (

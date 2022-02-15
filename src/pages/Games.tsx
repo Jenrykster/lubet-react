@@ -9,10 +9,8 @@ import {
 } from '../store/slices/gamesSlice';
 import { RootState } from '../store/store';
 import { getBets, getGames } from '../shared/services';
-import ErrorMessage from '../components/shared/ErrorMessage';
-import Header from '../components/shared/Header';
-import Centered from '../components/shared/Primitives/Centered';
-import { Main } from '../components/Games/';
+import { ErrorMessage, Header, Centered } from '@components/shared';
+import { Main } from '@components/Games/';
 
 const Games = () => {
   const [isLoading, setIsLoading] = useState(false);

@@ -1,5 +1,5 @@
-import { FormRoutes, Title } from '../components/Login';
-import Centered from '../components/shared/Primitives/Centered';
+import { FormRoutes, Title } from '@components/Login';
+import { Centered } from '@components/shared';
 
 const Login: React.FC = () => {
   return (

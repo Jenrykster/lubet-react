@@ -1,5 +1,5 @@
-import Header from '../components/shared/Header';
-import { Main } from '../components/NewBet/';
+import { Header } from '@components/shared';
+import { Main } from '@components/NewBet/';
 
 const NewBet = () => {
   return (
