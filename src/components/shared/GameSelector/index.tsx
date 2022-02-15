@@ -18,7 +18,7 @@ const GameSelector = (props: {
 
   useEffect(() => {
     if (props.required) {
-      if (!selectedGame) {
+      if (!selectedGame || Array.isArray(selectedGame)) {
         dispatch(changeSelectedGame({ gameId: games[0].id }));
       }
     }
