@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import { addToCart } from '../../store/slices/cartSlice';
 import { RootState } from '../../store/store';
-import Cart, { CartContainer } from '../shared/Cart';
+import Cart from '../shared/Cart';
+import { CartContainer } from '../shared/Cart/styles';
 import GameSelector from '../shared/GameSelector';
 import Button from '../shared/Primitives/Button';
 import H1 from '../shared/Primitives/H1';
@@ -190,19 +191,30 @@ const Main = () => {
       <StyledMain>
         <H1>
           <b>NEW BET </b>
-          FOR {'type' in selectedGame! && selectedGame?.type.toUpperCase()}
+          FOR{' '}
+          {selectedGame &&
+            'type' in selectedGame &&
+            selectedGame?.type.toUpperCase()}
         </H1>
         <BoldP>Choose a game</BoldP>
         <GameSelector required />
         <BoldP>Fill your bet</BoldP>
         <GameDescription>
-          {'description' in selectedGame! && selectedGame?.description}
+          {selectedGame &&
+            'description' in selectedGame! &&
+            selectedGame?.description}
         </GameDescription>
         <NumberGrid
           onNumberSelect={numberSelectHandler}
           selectedNumbers={selectedNumbers}
-          color={'color' in selectedGame! ? selectedGame.color : 'black'}
-          range={'range' in selectedGame! ? selectedGame?.range : 36}
+          color={
+            selectedGame && 'color' in selectedGame!
+              ? selectedGame.color
+              : 'black'
+          }
+          range={
+            selectedGame && 'range' in selectedGame! ? selectedGame?.range : 36
+          }
         />
         <ButtonContainer>
           <Row>

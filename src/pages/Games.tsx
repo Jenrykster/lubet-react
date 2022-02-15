@@ -55,7 +55,7 @@ const Games = () => {
       let gameSelection;
       if (Array.isArray(selectedGameType)) {
         gameSelection = selectedGameType.map((game) => game.type);
-      } else {
+      } else if (gameSelection) {
         gameSelection = 'type' in selectedGameType! && selectedGameType.type;
       }
       const bets = await getBets(gameSelection || '');
