@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import loginSchema from '../../../schemas/login';
+import loginSchema from '@schemas/login';
 import { login } from '../../../shared/services/auth/auth';
 import { loginUser } from '../../../store/slices/userSlice';
 import FormInput from '../FormInput';

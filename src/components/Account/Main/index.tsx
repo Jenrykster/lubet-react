@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { ProfilePicture } from '..';
-import updateAccountSchema from '../../../schemas/updateAccount';
+import updateAccountSchema from '@schemas/updateAccount';
 import { Button } from '../../shared';
 import { AccountContainer, UserEmail, UserName } from './styles';
 import { IFormData } from '../../../shared/interfaces';

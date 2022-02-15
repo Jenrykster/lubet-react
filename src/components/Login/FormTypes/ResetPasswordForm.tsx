@@ -3,7 +3,7 @@ import {
   changePassword,
   resetPassword,
 } from '../../../shared/services/auth/auth';
-import resetPasswordSchema from '../../../schemas/resetPassword';
+import resetPasswordSchema from '@schemas/resetPassword';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BackButton from '../BackButton';
