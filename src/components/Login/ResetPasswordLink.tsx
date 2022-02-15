@@ -1,4 +1,4 @@
-import TextLink from '../shared/Primitives/Text';
+import { TextLink } from '../shared/';
 import { Link } from 'react-router-dom';
 const ResetPasswordLink = () => {
   return (

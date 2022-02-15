@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Column from '../Primitives/Column';
 import H1 from '../Primitives/H1';
-import { TextButtonStyles } from '../TextButton';
+import { TextButtonStyles } from '..';
 
 export const Backdrop = styled.div`
   background: rgba(0, 0, 0, 0.5);

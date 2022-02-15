@@ -1,5 +1,4 @@
-import Card from '../../shared/Primitives/Card';
-import TextButton from '../../shared/TextButton';
+import { Card, TextButton } from '../../shared';
 import { createUser } from '../../../shared/services/auth/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';

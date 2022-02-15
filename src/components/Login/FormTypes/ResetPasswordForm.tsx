@@ -1,5 +1,4 @@
-import Card from '../../shared/Primitives/Card';
-import TextButton from '../../shared/TextButton';
+import { Card, TextButton } from '../../shared';
 import {
   changePassword,
   resetPassword,

@@ -10,7 +10,7 @@ import GameSelector from '../shared/GameSelector';
 import Button from '../shared/Primitives/Button';
 import H1 from '../shared/Primitives/H1';
 import Row from '../shared/Primitives/Row';
-import SelectorButton from '../shared/SelectorButton';
+import { SelectorButton } from '../shared';
 import AddToCartButton from './AddToCartButton';
 import NumberGrid from './NumberGrid';
 

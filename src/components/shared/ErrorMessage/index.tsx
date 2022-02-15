@@ -1,22 +1,7 @@
-import Centered from './Primitives/Centered';
-import styled from 'styled-components';
-import Column from './Primitives/Column';
+import Centered from '../Primitives/Centered';
+import Column from '../Primitives/Column';
+import { ErrorStyle } from './styles';
 
-const ErrorStyle = styled.h3`
-  color: red;
-  text-align: center;
-  p {
-    color: #bbbbbb;
-  }
-  b {
-    color: #756d6d;
-    font-weight: 800;
-  }
-  b:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-`;
 const ErrorMessage = () => {
   return (
     <Centered>

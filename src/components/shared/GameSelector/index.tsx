@@ -1,29 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { changeSelectedGame, GameType } from '../../store/slices/gamesSlice';
-import { RootState } from '../../store/store';
-import Row from './Primitives/Row';
-import SelectorButton from './SelectorButton';
+import { changeSelectedGame, GameType } from '../../../store/slices/gamesSlice';
+import { RootState } from '../../../store/store';
+import Row from '../Primitives/Row';
+import { SelectorButton } from './SubComponents';
+import { SelectorButtonContainer } from './styles';
 
-const SelectorButtonContainer = styled(Row)`
-  margin: auto 0rem;
-  ${SelectorButton}:first-child {
-    margin-left: 0;
-  }
-
-  @media (max-width: 700px) {
-    display: flex;
-    flex-direction: row;
-    width: 70vw;
-    overflow-x: auto;
-
-    ::-webkit-scrollbar {
-      width: 0px;
-      background: transparent; /* make scrollbar transparent */
-    }
-  }
-`;
 const GameSelector = (props: {
   required?: boolean;
   multiselection?: boolean;

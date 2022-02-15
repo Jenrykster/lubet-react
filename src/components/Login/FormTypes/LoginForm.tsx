@@ -1,5 +1,4 @@
-import Card from '../../shared/Primitives/Card';
-import TextButton from '../../shared/TextButton';
+import { Card, TextButton } from '../../shared';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

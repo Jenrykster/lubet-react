@@ -1,9 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import PageNotFound from '../shared/Utils/PageNotFound';
-import LoginForm from './FormTypes/LoginForm';
-import RegistrationForm from './FormTypes/RegistrationForm';
-import ResetPasswordForm from './FormTypes/ResetPasswordForm';
+import { PageNotFound } from '../shared';
+import { LoginForm, RegistrationForm, ResetPasswordForm } from './FormTypes';
 
 const FormRoutes: React.FC = () => {
   const location = useLocation();
