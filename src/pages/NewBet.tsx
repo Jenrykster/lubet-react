@@ -1,4 +1,4 @@
-import { Header } from '@components/shared';
+import { Header } from '@components/SharedComponents';
 import { Main } from '@components/NewBet/';
 
 const NewBet = () => {

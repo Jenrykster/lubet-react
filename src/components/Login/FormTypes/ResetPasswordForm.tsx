@@ -1,4 +1,4 @@
-import { Card, TextButton } from '../../shared';
+import { Card, TextButton } from '../../SharedComponents';
 import {
   changePassword,
   resetPassword,

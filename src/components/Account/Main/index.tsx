@@ -1,15 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { ProfilePicture } from '..';
+import { ProfilePicture } from '@components/Account';
 import updateAccountSchema from '@schemas/updateAccount';
-import { Button } from '../../shared';
+import { Button } from '@components/SharedComponents';
 import { AccountContainer, UserEmail, UserName } from './styles';
-import { IFormData } from '../../../shared/interfaces';
-import { updateMyUser } from '../../../shared/services';
+import { IFormData } from '@shared/interfaces';
+import { updateMyUser } from '@shared/services';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { loginUser } from '../../../store/slices/userSlice';
+import { RootState } from '@store/store';
+import { loginUser } from '@store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const Main = () => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Aligned, Button } from '../shared';
+import { Aligned, Button } from '../SharedComponents';
 import { IoMdCart } from 'react-icons/io';
 
 export const CartButton = styled(Button)`

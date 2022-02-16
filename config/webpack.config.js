@@ -309,6 +309,10 @@ module.exports = function (webpackEnv) {
         .map((ext) => `.${ext}`)
         .filter((ext) => useTypeScript || !ext.includes('ts')),
       alias: {
+        '@store': path.resolve(__dirname, '../src/store/'),
+        '@pages': path.resolve(__dirname, '../src/pages/'),
+        '@hooks': path.resolve(__dirname, '../src/hooks/'),
+        '@shared': path.resolve(__dirname, '../src/shared/'),
         '@schemas': path.resolve(__dirname, '../src/schemas/'),
         '@components': path.resolve(__dirname, '../src/components/'),
         // Support React Native Web

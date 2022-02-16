@@ -12,7 +12,7 @@ import {
   H1,
   Row,
   SelectorButton,
-} from '../shared';
+} from '../SharedComponents';
 import AddToCartButton from './AddToCartButton';
 import NumberGrid from './NumberGrid';
 

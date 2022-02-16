@@ -9,8 +9,8 @@ import {
 } from '../store/slices/gamesSlice';
 import { RootState } from '../store/store';
 import { getBets, getGames } from '../shared/services';
-import { ErrorMessage, Header, Centered } from '@components/shared';
-import { Main } from '@components/Games/';
+import { ErrorMessage, Header, Centered } from '@components/SharedComponents';
+import { GameMain } from '@components/Games/';
 
 const Games = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +73,7 @@ const Games = () => {
           <Watch wrapperStyle={{ marginTop: '-5rem' }} />
         </Centered>
       )}
-      {!isLoading && !isError && <Main bets={bets} />}
+      {!isLoading && !isError && <GameMain bets={bets} />}
       {!isLoading && isError && <ErrorMessage />}
     </div>
   );

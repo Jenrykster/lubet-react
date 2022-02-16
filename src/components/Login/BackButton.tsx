@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { TextButton } from '../shared';
+import { TextButton } from '../SharedComponents';
 
 const BackButton = () => {
   const navigate = useNavigate();

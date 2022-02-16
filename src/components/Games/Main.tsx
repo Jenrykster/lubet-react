@@ -7,7 +7,7 @@ import {
   GameSelector,
   TextButton,
   TextButtonStyles,
-} from '../shared';
+} from '../SharedComponents';
 import BetsList, { BetType } from './BetsList';
 
 const ResponsiveFilter = styled.div`
