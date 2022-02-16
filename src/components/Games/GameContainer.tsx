@@ -45,7 +45,7 @@ const GameContainer = (props: GameContainerProps) => {
         <p>
           {props.date} - ({props.price})
         </p>
-        <h3>{props.gameName}</h3>
+        <h3 data-cy='game-type-label'>{props.gameName}</h3>
       </Column>
     </GameContainerStyles>
   );

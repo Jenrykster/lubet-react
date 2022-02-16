@@ -68,7 +68,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it('Completes the cart with random games', () => {
+  it.skip('Completes the cart with random games', () => {
     cy.server();
     cy.route('GET', '**/cart_games').as('getGamesData');
     cy.login('test@email.com', '123456');
@@ -114,5 +114,36 @@ describe('Lubet test', () => {
     };
 
     addRandomGamesToCart();
+  });
+  it('Filters the bets', () => {
+    cy.login('test@email.com', '123456');
+    cy.get('.swal2-confirm').click();
+    for (let i = 0; i < Cypress.env('gameTypes').length; i++) {
+      cy.get('[data-cy=game-selector-btn').eq(i).click();
+      cy.get('[data-cy=game-type-label]').each(($gameLabel) => {
+        cy.wrap($gameLabel).contains(Cypress.env('gameTypes')[i].type);
+      });
+      cy.get('[data-cy=game-selector-btn').eq(i).click();
+    }
+    for (let i = 0; i < Cypress.env('gameTypes').length - 1; i++) {
+      const games = [
+        Cypress.env('gameTypes')[i].type,
+        Cypress.env('gameTypes')[i + 1].type,
+      ];
+      const gamesRegex = new RegExp(`${games.join('|')}`, 'g');
+
+      cy.get('[data-cy=game-selector-btn').eq(i).click();
+      cy.get('[data-cy=game-selector-btn')
+        .eq(i + 1)
+        .click();
+
+      cy.get('[data-cy=game-type-label]').contains(gamesRegex);
+
+      cy.get('[data-cy=game-selector-btn').eq(i).click();
+      cy.get('[data-cy=game-selector-btn')
+        .eq(i + 1)
+        .click();
+    }
+    cy.get('[data-cy=game-type-label]').should('exist');
   });
 });
