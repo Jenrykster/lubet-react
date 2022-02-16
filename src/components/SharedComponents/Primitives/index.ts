@@ -9,4 +9,4 @@ export { default as H1 } from './H1';
 export { default as Input } from './Input';
 export { default as P } from './P';
 export { default as Row } from './Row';
-export { default as TextLink } from './Text';
+export { default as Text } from './Text';

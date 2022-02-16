@@ -2,7 +2,7 @@ import { IResponse, IFormData, IData } from '../shared/interfaces';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const useUserRequest = (
+export const useUserRequest = (
   method: (args: IFormData) => Promise<IResponse>,
   onSuccess: { route: string; message: string },
   token?: string
@@ -32,5 +32,3 @@ const useUserRequest = (
     appendOnSuccess,
   };
 };
-
-export default useUserRequest;

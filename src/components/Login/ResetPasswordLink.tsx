@@ -1,12 +1,12 @@
-import { TextLink } from '@components/SharedComponents';
+import { Text } from '@components/SharedComponents';
 import { Link } from 'react-router-dom';
 const ResetPasswordLink = () => {
   return (
-    <TextLink>
+    <Text>
       <Link data-cy='reset-password-btn' to='/reset'>
         I forgot my password
       </Link>
-    </TextLink>
+    </Text>
   );
 };
 

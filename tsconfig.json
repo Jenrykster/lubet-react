@@ -3,7 +3,7 @@
     "target": "es5",
     "baseUrl": ".",
     "paths": {
-      "@hooks/*": ["./src/hooks/*"],
+      "@hooks/*": ["./src/hooks/index.ts"],
       "@pages/*": ["./src/pages/*"],
       "@store/*": ["./src/store/*"],
       "@shared/*": ["./src/shared/*"],

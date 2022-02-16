@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { BackButton, FormInput, FormWrapper } from '..';
 import { IData, InputTypes } from '@shared/interfaces';
-import useUserRequest from '@hooks/useUserRequest';
+import { useUserRequest } from '@hooks/';
 import { useState } from 'react';
 
 const ResetPasswordForm = () => {

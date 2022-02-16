@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Centered } from '.';
+import Centered from './Centered';
 
 export default styled(Centered)`
   flex-direction: column;

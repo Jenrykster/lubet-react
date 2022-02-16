@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from '@schemas/register';
 import { BackButton, FormInput, FormWrapper } from '..';
 import { InputTypes } from '@shared/interfaces';
-import useUserRequest from '@hooks/useUserRequest';
+import { useUserRequest } from '@hooks/';
 
 const RegistrationForm = () => {
   const {

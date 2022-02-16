@@ -10,7 +10,7 @@ import { login } from '@shared/services/auth/auth';
 import { loginUser } from '@store/slices/userSlice';
 import { FormInput, FormWrapper, ResetPasswordLink } from '..';
 import { IData, InputTypes } from '@shared/interfaces';
-import useUserRequest from '@hooks/useUserRequest';
+import { useUserRequest } from '@hooks/';
 
 const LoginForm = () => {
   const navigate = useNavigate();
