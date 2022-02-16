@@ -34,11 +34,11 @@ describe('Lubet test', () => {
     });
   });
 
-  it('Logins an user', () => {
+  it.skip('Logins an user', () => {
     cy.login('test@email.com', '123456');
   });
 
-  it('Logouts an user', () => {
+  it.skip('Logouts an user', () => {
     cy.login('test@email.com', '123456');
     cy.get('.swal2-confirm').click();
     cy.get('[data-cy=logout-btn]').click();
@@ -48,7 +48,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it('Resets a password', () => {
+  it.skip('Resets a password', () => {
     cy.visit('http://localhost:3000/reset');
     cy.get('[data-cy=email]').focus().type('test@email.com');
 
@@ -66,5 +66,24 @@ describe('Lubet test', () => {
       expect(xhr.response.body).has.property('token');
       expect(xhr.response.body.token).is.not.null;
     });
+  });
+
+  it('Completes the cart with random games', () => {
+    cy.server();
+    cy.route('GET', '**/cart_games').as('getGamesData');
+    cy.login('test@email.com', '123456');
+    cy.get('.swal2-confirm').click();
+
+    cy.get('[data-cy=new-bet-btn]').click();
+
+    cy.wait('@getGamesData').then((xhr) => {
+      expect(xhr.status).be.eq(200);
+      expect(xhr.response.body).has.property('min_cart_value');
+      expect(xhr.response.body['min_cart_value']).is.not.null;
+
+      Cypress.env('minCartValue', xhr.response.body['min_cart_value']);
+    });
+    cy.getCartValue();
+    cy.log(Cypress.env('cartValue'));
   });
 });

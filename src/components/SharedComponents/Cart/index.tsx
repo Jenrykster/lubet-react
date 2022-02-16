@@ -103,7 +103,10 @@ const Cart = () => {
         {cartItems.length === 0 && <EmptyCartMessage />}
         <H1>
           <b>CART </b>
-          TOTAL: {formatCurrency(cartTotalPrice)}
+          TOTAL:{' '}
+          <span data-cy='curr-cart-value'>
+            {formatCurrency(cartTotalPrice)}
+          </span>
         </H1>
         <TextButton onClick={saveBets} text='Save' arrow />
       </CartContainer>

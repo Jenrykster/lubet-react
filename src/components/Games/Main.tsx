@@ -67,7 +67,12 @@ const Main = (props: { bets: BetType[] }) => {
         <Row>
           <GameSelector multiselection />
         </Row>
-        <TextButton text='New Bet' onClick={() => navigate('/new-bet')} arrow />
+        <TextButton
+          data-cy='new-bet-btn'
+          text='New Bet'
+          onClick={() => navigate('/new-bet')}
+          arrow
+        />
       </ResponsiveFilter>
       <BetsList bets={props.bets} />
     </StyledMain>

@@ -46,3 +46,12 @@ Cypress.Commands.add('login', (email, password) => {
     expect(xhr.response.body.token.token).is.not.null;
   });
 });
+
+Cypress.Commands.add('getCartValue', () => {
+  cy.get('[data-cy=curr-cart-value]')
+    .invoke('text')
+    .then((cartText) => {
+      let val = parseFloat(cartText.slice(3, -1));
+      Cypress.env('cartValue', val);
+    });
+});
