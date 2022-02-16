@@ -78,12 +78,41 @@ describe('Lubet test', () => {
 
     cy.wait('@getGamesData').then((xhr) => {
       expect(xhr.status).be.eq(200);
+      expect(xhr.response.body).has.property('types');
+      expect(xhr.response.body.types).is.not.null;
       expect(xhr.response.body).has.property('min_cart_value');
       expect(xhr.response.body['min_cart_value']).is.not.null;
 
+      Cypress.env('gameTypes', xhr.response.body.types);
       Cypress.env('minCartValue', xhr.response.body['min_cart_value']);
     });
-    cy.getCartValue();
-    cy.log(Cypress.env('cartValue'));
+
+    const MIN_CART_VALUE = Cypress.env('minCartValue');
+    const NUMBER_OF_GAMES = Cypress.env('gameTypes').length;
+    let cartValue = 0;
+
+    const addRandomGamesToCart = () => {
+      cy.get('[data-cy=curr-cart-value]')
+        .invoke('text')
+        .then((cartText) => {
+          cartValue = parseValue(cartText);
+          if (cartValue < MIN_CART_VALUE) {
+            cy.get('[data-cy=game-selector-btn')
+              .eq(parseInt(Math.random() * NUMBER_OF_GAMES))
+              .click();
+            cy.get('[data-cy=complete-game-btn]').click();
+            cy.get('[data-cy=add-to-cart-btn]').click();
+            addRandomGamesToCart();
+          } else {
+            cy.get('[data-cy=save-btn]').click();
+          }
+        });
+    };
+
+    const parseValue = (val) => {
+      return parseFloat(val.slice(3, -1));
+    };
+
+    addRandomGamesToCart();
   });
 });

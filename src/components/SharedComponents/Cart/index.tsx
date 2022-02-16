@@ -108,7 +108,7 @@ const Cart = () => {
             {formatCurrency(cartTotalPrice)}
           </span>
         </H1>
-        <TextButton onClick={saveBets} text='Save' arrow />
+        <TextButton data-cy='save-btn' onClick={saveBets} text='Save' arrow />
       </CartContainer>
     </React.Fragment>
   );

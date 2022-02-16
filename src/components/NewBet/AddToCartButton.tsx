@@ -19,9 +19,12 @@ export const CartButton = styled(Button)`
   }
 `;
 
-const AddToCartButton = (props: { onClick: () => void }) => {
+const AddToCartButton = (props: {
+  onClick: () => void;
+  'data-cy'?: string;
+}) => {
   return (
-    <CartButton onClick={props.onClick}>
+    <CartButton data-cy={props['data-cy']} onClick={props.onClick}>
       <Aligned>
         <IoMdCart />
         Add to cart

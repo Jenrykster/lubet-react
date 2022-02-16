@@ -63,6 +63,7 @@ const GameSelector = (props: {
     return games.map((game) => {
       return (
         <SelectorButton
+          data-cy='game-selector-btn'
           key={game.id}
           color={game.color}
           active={isActive(game.id)}

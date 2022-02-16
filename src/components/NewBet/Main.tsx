@@ -220,10 +220,13 @@ const Main = () => {
         />
         <ButtonContainer>
           <Row>
-            <Button onClick={generateRandomNumbers}>Complete Game</Button>
+            <Button onClick={generateRandomNumbers} data-cy='complete-game-btn'>
+              Complete Game
+            </Button>
             <Button onClick={clearNumbers}>Clear Game</Button>
           </Row>
           <AddToCartButton
+            data-cy='add-to-cart-btn'
             onClick={() => addSelectedNumbersToCart(selectedNumbers)}
           />
         </ButtonContainer>
