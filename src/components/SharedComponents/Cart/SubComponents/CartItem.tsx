@@ -2,11 +2,9 @@ import { IoIosTrash } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
-import { formatCurrency } from '../../../../shared/utils';
-import { deleteCartItem } from '../../../../store/slices/cartSlice';
-import Aligned from '../../Primitives/Aligned';
-import P from '../../Primitives/P';
-import Row from '../../Primitives/Row';
+import { formatCurrency } from '@shared/utils';
+import { deleteCartItem } from '@store/slices/cartSlice';
+import { Aligned, P, Row } from '@components/SharedComponents';
 
 const CartDataContainer = styled.div`
   border-left: 4px solid ${(props) => props.color};

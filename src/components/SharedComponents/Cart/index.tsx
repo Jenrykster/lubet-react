@@ -3,13 +3,11 @@ import { MdOutlineShoppingCart } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { postBets } from '../../../shared/services';
-import { formatCurrency } from '../../../shared/utils';
-import { CartItemType, clearCart } from '../../../store/slices/cartSlice';
-import { RootState } from '../../../store/store';
-import Column from '../Primitives/Column';
-import H1 from '../Primitives/H1';
-import TextButton from '../TextButton';
+import { postBets } from '@shared/services';
+import { formatCurrency } from '@shared/utils';
+import { CartItemType, clearCart } from '@store/slices/cartSlice';
+import { RootState } from '@store/store';
+import { Column, H1, TextButton } from '@components/SharedComponents';
 import { Backdrop, CartContainer, ShowCartButton } from './styles';
 import { CartItem, EmptyCartMessage } from './SubComponents';
 

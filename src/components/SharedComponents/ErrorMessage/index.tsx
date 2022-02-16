@@ -1,5 +1,4 @@
-import Centered from '../Primitives/Centered';
-import Column from '../Primitives/Column';
+import { Centered, Column } from '@components/SharedComponents';
 import { ErrorStyle } from './styles';
 
 const ErrorMessage = () => {

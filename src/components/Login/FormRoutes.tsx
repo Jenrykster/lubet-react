@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { PageNotFound } from '../SharedComponents';
+import { PageNotFound } from '@components/SharedComponents';
 import { LoginForm, RegistrationForm, ResetPasswordForm } from './FormTypes';
 
 const FormRoutes: React.FC = () => {

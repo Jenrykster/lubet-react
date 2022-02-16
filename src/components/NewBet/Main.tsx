@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
-import { addToCart } from '../../store/slices/cartSlice';
-import { RootState } from '../../store/store';
+import { addToCart } from '@store/slices/cartSlice';
+import { RootState } from '@store/store';
 import {
   Cart,
   CartContainer,

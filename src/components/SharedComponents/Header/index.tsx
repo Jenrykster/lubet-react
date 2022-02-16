@@ -1,9 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../../store/slices/userSlice';
-import Column from '../Primitives/Column';
-import Row from '../Primitives/Row';
-import TextButton from '../TextButton';
+import { Column, Row, TextButton } from '@components/SharedComponents';
 import { CurvedUnderline, HeaderLogo, StyledHeader } from './styles';
 
 const Header = (props: { showHomeButton?: boolean }) => {

@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { formatCurrency } from '../../shared/utils';
-import { RootState } from '../../store/store';
-import Column from '../SharedComponents/Primitives/Column';
-import H1 from '../SharedComponents/Primitives/H1';
+import { formatCurrency } from '@shared/utils';
+import { RootState } from '@store/store';
+import { Column, H1 } from '@components/SharedComponents';
 import { GameContainer } from './';
 
 export type BetType = {

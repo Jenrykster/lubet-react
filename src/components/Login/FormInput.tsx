@@ -1,8 +1,8 @@
 import React from 'react';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
-import { IFormErrors, InputTypes } from '../../shared/interfaces';
-import { capitalizeFirstLetter } from '../../shared/utils';
-import { ErrorLabel, Input } from '../SharedComponents';
+import { IFormErrors, InputTypes } from '@shared/interfaces';
+import { capitalizeFirstLetter } from '@shared/utils';
+import { ErrorLabel, Input } from '@components/SharedComponents';
 
 const FormInput = (props: {
   errors: IFormErrors;

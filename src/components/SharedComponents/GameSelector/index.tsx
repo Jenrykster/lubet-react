@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeSelectedGame, GameType } from '../../../store/slices/gamesSlice';
-import { RootState } from '../../../store/store';
-import Row from '../Primitives/Row';
+import { changeSelectedGame, GameType } from '@store/slices/gamesSlice';
+import { RootState } from '@store/store';
+import { Row } from '@components/SharedComponents';
 import { SelectorButton } from './SubComponents';
 import { SelectorButtonContainer } from './styles';
 

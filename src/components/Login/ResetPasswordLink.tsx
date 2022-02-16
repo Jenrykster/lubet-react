@@ -1,4 +1,4 @@
-import { TextLink } from '../SharedComponents';
+import { TextLink } from '@components/SharedComponents';
 import { Link } from 'react-router-dom';
 const ResetPasswordLink = () => {
   return (

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { BoldText, TransitionPage } from '../SharedComponents';
+import { BoldText, TransitionPage } from '@components/SharedComponents';
 
 const FormWrapper = (props: { title: string; children?: ReactNode }) => {
   return (

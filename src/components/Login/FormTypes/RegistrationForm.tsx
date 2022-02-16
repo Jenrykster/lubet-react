@@ -1,13 +1,11 @@
-import { Card, TextButton } from '../../SharedComponents';
-import { createUser } from '../../../shared/services/auth/auth';
+import { Card, TextButton } from '@components/SharedComponents';
+import { createUser } from '@shared/services/auth/auth';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerSchema from '@schemas/register';
-import BackButton from '../BackButton';
-import FormInput from '../FormInput';
-import { InputTypes } from '../../../shared/interfaces';
-import useUserRequest from '../../../hooks/useUserRequest';
-import FormWrapper from '../FormWrapper';
+import { BackButton, FormInput, FormWrapper } from '..';
+import { InputTypes } from '@shared/interfaces';
+import useUserRequest from '@hooks/useUserRequest';
 
 const RegistrationForm = () => {
   const {

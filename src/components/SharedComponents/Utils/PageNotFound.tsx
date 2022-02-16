@@ -1,4 +1,4 @@
-import Centered from '../Primitives/Centered';
+import { Centered } from '@components/SharedComponents';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const PageNotFound = () => {

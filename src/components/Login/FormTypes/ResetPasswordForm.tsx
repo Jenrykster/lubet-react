@@ -1,16 +1,11 @@
-import { Card, TextButton } from '../../SharedComponents';
-import {
-  changePassword,
-  resetPassword,
-} from '../../../shared/services/auth/auth';
+import { Card, TextButton } from '@components/SharedComponents';
+import { changePassword, resetPassword } from '@shared/services/auth/auth';
 import resetPasswordSchema from '@schemas/resetPassword';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import BackButton from '../BackButton';
-import FormInput from '../FormInput';
-import { IData, InputTypes } from '../../../shared/interfaces';
-import useUserRequest from '../../../hooks/useUserRequest';
-import FormWrapper from '../FormWrapper';
+import { BackButton, FormInput, FormWrapper } from '..';
+import { IData, InputTypes } from '@shared/interfaces';
+import useUserRequest from '@hooks/useUserRequest';
 import { useState } from 'react';
 
 const ResetPasswordForm = () => {

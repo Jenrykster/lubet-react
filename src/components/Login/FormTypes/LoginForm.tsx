@@ -1,18 +1,16 @@
-import { Card, TextButton } from '../../SharedComponents';
+import { Card, TextButton } from '@components/SharedComponents';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '@store/store';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginSchema from '@schemas/login';
-import { login } from '../../../shared/services/auth/auth';
-import { loginUser } from '../../../store/slices/userSlice';
-import FormInput from '../FormInput';
-import { IData, InputTypes } from '../../../shared/interfaces';
-import ResetPasswordLink from '../ResetPasswordLink';
-import FormWrapper from '../FormWrapper';
-import useUserRequest from '../../../hooks/useUserRequest';
+import { login } from '@shared/services/auth/auth';
+import { loginUser } from '@store/slices/userSlice';
+import { FormInput, FormWrapper, ResetPasswordLink } from '..';
+import { IData, InputTypes } from '@shared/interfaces';
+import useUserRequest from '@hooks/useUserRequest';
 
 const LoginForm = () => {
   const navigate = useNavigate();

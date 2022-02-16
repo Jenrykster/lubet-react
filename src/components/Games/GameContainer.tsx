@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Column from '../SharedComponents/Primitives/Column';
-
+import { Column } from '@components/SharedComponents';
 interface GameContainerProps {
   color: string;
   gameName: string;
