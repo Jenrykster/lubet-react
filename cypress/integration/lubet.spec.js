@@ -60,7 +60,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it('Logins an user', () => {
+  it.skip('Logins an user', () => {
     cy.visit('http://localhost:3000/');
 
     // EMPTY FIELDSs
@@ -102,9 +102,25 @@ describe('Lubet test', () => {
     });
   });
 
-  it.skip('Resets a password', () => {
+  it('Resets a password', () => {
     cy.visit('http://localhost:3000/reset');
-    cy.get('[data-cy=email]').focus().type(TEST_USER_EMAIL);
+
+    // EMPTY FIELDS
+    cy.get('[data-cy=send-link-btn]').click();
+
+    cy.get('[data-cy=email-error-label]').should('exist').and('not.be.empty');
+
+    // NON EXISTING EMAIL
+    cy.get('[data-cy=email]').focus().type('1@one.com');
+
+    cy.get('[data-cy=send-link-btn]').click();
+
+    cy.get('.swal2-icon').should('have.class', 'swal2-error');
+    cy.get('.swal2-confirm').click();
+
+    // VALID
+    cy.get('[data-cy=email]').clear();
+    cy.get('[data-cy=email]').type(TEST_USER_EMAIL);
 
     cy.intercept('POST', '**/reset').as('postPasswordReset');
 
