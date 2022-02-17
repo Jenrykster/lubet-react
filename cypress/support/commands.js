@@ -27,21 +27,33 @@
 /*eslint-disable*/
 
 Cypress.Commands.add('login', (email, password) => {
+  cy.intercept('POST', '**/login').as('postUser');
+  cy.intercept('GET', '**/cart_games').as('getGamesData');
+
   cy.visit('http://localhost:3000/');
 
   cy.get('[data-cy=email]').focus().type(email);
 
   cy.get('[data-cy=password]').focus().type(password);
 
-  cy.intercept('POST', '**/login').as('postUser');
-
   cy.get('[data-cy=login-btn]').click();
 
   cy.wait('@postUser').then((xhr) => {
-    expect(xhr.status).be.eq(200);
+    expect(xhr.response.statusCode).be.eq(200);
     expect(xhr.response.body).has.property('user');
     expect(xhr.response.body.user).is.not.null;
     expect(xhr.response.body).has.property('token');
     expect(xhr.response.body.token.token).is.not.null;
+  });
+
+  cy.wait('@getGamesData').then((xhr) => {
+    expect(xhr.response.statusCode).be.eq(200);
+    expect(xhr.response.body).has.property('types');
+    expect(xhr.response.body.types).is.not.null;
+    expect(xhr.response.body).has.property('min_cart_value');
+    expect(xhr.response.body['min_cart_value']).is.not.null;
+
+    Cypress.env('gameTypes', xhr.response.body.types);
+    Cypress.env('minCartValue', xhr.response.body['min_cart_value']);
   });
 });

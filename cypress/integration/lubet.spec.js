@@ -13,7 +13,7 @@ function generateEmail(length) {
 }
 
 describe('Lubet test', () => {
-  it.skip('Creates an user', () => {
+  it('Creates an user', () => {
     cy.visit('http://localhost:3000/register');
     cy.get('[data-cy=name]').focus().type('Nome de Alguém');
     cy.get('[data-cy=email]').focus().type(generateEmail(6));
@@ -25,7 +25,7 @@ describe('Lubet test', () => {
     cy.get('[data-cy=sign-up-btn]').click();
 
     cy.wait('@postUser').then((xhr) => {
-      expect(xhr.status).be.eq(200);
+      expect(xhr.response.statusCode).be.eq(200);
       expect(xhr.response.body).has.property('user');
       expect(xhr.response.body.user).is.not.null;
       expect(xhr.response.body).has.property('token');
@@ -33,11 +33,11 @@ describe('Lubet test', () => {
     });
   });
 
-  it.skip('Logins an user', () => {
+  it('Logins an user', () => {
     cy.login('test@email.com', '123456');
   });
 
-  it.skip('Logouts an user', () => {
+  it('Logouts an user', () => {
     cy.login('test@email.com', '123456');
     cy.get('.swal2-confirm').click();
     cy.get('[data-cy=logout-btn]').click();
@@ -47,7 +47,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it.skip('Resets a password', () => {
+  it('Resets a password', () => {
     cy.visit('http://localhost:3000/reset');
     cy.get('[data-cy=email]').focus().type('test@email.com');
 
@@ -56,7 +56,7 @@ describe('Lubet test', () => {
     cy.get('[data-cy=send-link-btn]').click();
 
     cy.wait('@postPasswordReset').then((xhr) => {
-      expect(xhr.status).be.eq(200);
+      expect(xhr.response.statusCode).be.eq(200);
       expect(xhr.response.body).has.property('email');
       expect(xhr.response.body.user).is.not.null;
       expect(xhr.response.body).has.property('id');
@@ -67,22 +67,10 @@ describe('Lubet test', () => {
   });
 
   it.skip('Completes the cart with random games', () => {
-    cy.intercept('GET', '**/cart_games').as('getGamesData');
     cy.login('test@email.com', '123456');
     cy.get('.swal2-confirm').click();
 
     cy.get('[data-cy=new-bet-btn]').click();
-
-    cy.wait('@getGamesData').then((xhr) => {
-      expect(xhr.status).be.eq(200);
-      expect(xhr.response.body).has.property('types');
-      expect(xhr.response.body.types).is.not.null;
-      expect(xhr.response.body).has.property('min_cart_value');
-      expect(xhr.response.body['min_cart_value']).is.not.null;
-
-      Cypress.env('gameTypes', xhr.response.body.types);
-      Cypress.env('minCartValue', xhr.response.body['min_cart_value']);
-    });
 
     const MIN_CART_VALUE = Cypress.env('minCartValue');
     const NUMBER_OF_GAMES = Cypress.env('gameTypes').length;
@@ -113,7 +101,7 @@ describe('Lubet test', () => {
 
     addRandomGamesToCart();
   });
-  it('Filters the bets', () => {
+  it.skip('Filters the bets', () => {
     cy.login('test@email.com', '123456');
     cy.get('.swal2-confirm').click();
     cy.intercept('GET', '**/bet/all-bets?**').as('filterBets');
