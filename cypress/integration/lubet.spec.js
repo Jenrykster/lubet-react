@@ -89,6 +89,7 @@ describe('Lubet test', () => {
 
     const MIN_CART_VALUE = Cypress.env('minCartValue');
     const NUMBER_OF_GAMES = Cypress.env('gameTypes').length;
+
     let cartValue = 0;
 
     const addRandomGamesToCart = () => {
@@ -118,13 +119,18 @@ describe('Lubet test', () => {
   it('Filters the bets', () => {
     cy.login('test@email.com', '123456');
     cy.get('.swal2-confirm').click();
+    cy.intercept('GET', '**/bet/all-bets?**').as('filterBets');
     for (let i = 0; i < Cypress.env('gameTypes').length; i++) {
       cy.get('[data-cy=game-selector-btn').eq(i).click();
-      cy.get('[data-cy=game-type-label]').each(($gameLabel) => {
-        cy.wrap($gameLabel).contains(Cypress.env('gameTypes')[i].type);
+      cy.wait('@filterBets').then((xhr) => {
+        cy.get('[data-cy=game-type-label]').each(($gameLabel) => {
+          cy.wrap($gameLabel).contains(Cypress.env('gameTypes')[i].type);
+        });
       });
       cy.get('[data-cy=game-selector-btn').eq(i).click();
     }
+
+    cy.intercept('GET', '**/bet/all-bets?**&**').as('filterBets');
     for (let i = 0; i < Cypress.env('gameTypes').length - 1; i++) {
       const games = [
         Cypress.env('gameTypes')[i].type,
@@ -137,8 +143,11 @@ describe('Lubet test', () => {
         .eq(i + 1)
         .click();
 
-      cy.get('[data-cy=game-type-label]').contains(gamesRegex);
-
+      cy.wait('@filterBets').then((xhr) => {
+        cy.get('[data-cy=game-type-label]').each(($gameLabel) => {
+          cy.wrap($gameLabel).invoke('text').should('match', gamesRegex);
+        });
+      });
       cy.get('[data-cy=game-selector-btn').eq(i).click();
       cy.get('[data-cy=game-selector-btn')
         .eq(i + 1)
