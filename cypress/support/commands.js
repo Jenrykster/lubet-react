@@ -32,9 +32,9 @@ Cypress.Commands.add('login', (email, password) => {
 
   cy.visit('http://localhost:3000/');
 
-  cy.get('[data-cy=email]').focus().type(email);
+  cy.get('[data-cy=email]').focus().clear().type(email);
 
-  cy.get('[data-cy=password]').focus().type(password);
+  cy.get('[data-cy=password]').focus().clear().type(password);
 
   cy.get('[data-cy=login-btn]').click();
 

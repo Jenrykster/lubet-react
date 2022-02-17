@@ -15,7 +15,7 @@ function generateEmail(length) {
 }
 
 describe('Lubet test', () => {
-  it('Creates an user', () => {
+  it.skip('Creates an user', () => {
     cy.visit('http://localhost:3000/register');
 
     // EMPTY FIELDS
@@ -60,7 +60,35 @@ describe('Lubet test', () => {
     });
   });
 
-  it.skip('Logins an user', () => {
+  it('Logins an user', () => {
+    cy.visit('http://localhost:3000/');
+
+    // EMPTY FIELDSs
+    cy.get('[data-cy=login-btn]').click();
+
+    cy.get('[data-cy=email-error-label]').should('exist').and('not.be.empty');
+    cy.get('[data-cy=password-error-label]')
+      .should('exist')
+      .and('not.be.empty');
+
+    // INVALID EMAIL
+    cy.get('[data-cy=email]').focus().type('invalid-mail@');
+    cy.get('[data-cy=email-error-label]').should('exist').and('not.be.empty');
+
+    // INVALID PASSWORD
+    cy.get('[data-cy=password]').focus().type('AAA');
+    cy.get('[data-cy=password-error-label]')
+      .should('exist')
+      .and('not.be.empty');
+
+    // Non existing account
+    cy.get('[data-cy=email]').focus().clear().type('1@one.com');
+    cy.get('[data-cy=password]').focus().clear().type('123456');
+    cy.get('[data-cy=login-btn]').click();
+
+    cy.get('.swal2-icon').should('have.class', 'swal2-error');
+    cy.get('.swal2-confirm').click();
+
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
   });
 
