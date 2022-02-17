@@ -20,8 +20,7 @@ describe('Lubet test', () => {
 
     cy.get('[data-cy=password]').focus().type('123456');
 
-    cy.server();
-    cy.route('POST', '**/user/create').as('postUser');
+    cy.intercept('POST', '**/user/create').as('postUser');
 
     cy.get('[data-cy=sign-up-btn]').click();
 
@@ -52,8 +51,7 @@ describe('Lubet test', () => {
     cy.visit('http://localhost:3000/reset');
     cy.get('[data-cy=email]').focus().type('test@email.com');
 
-    cy.server();
-    cy.route('POST', '**/reset').as('postPasswordReset');
+    cy.intercept('POST', '**/reset').as('postPasswordReset');
 
     cy.get('[data-cy=send-link-btn]').click();
 
@@ -69,8 +67,7 @@ describe('Lubet test', () => {
   });
 
   it.skip('Completes the cart with random games', () => {
-    cy.server();
-    cy.route('GET', '**/cart_games').as('getGamesData');
+    cy.intercept('GET', '**/cart_games').as('getGamesData');
     cy.login('test@email.com', '123456');
     cy.get('.swal2-confirm').click();
 

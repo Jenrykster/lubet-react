@@ -33,8 +33,7 @@ Cypress.Commands.add('login', (email, password) => {
 
   cy.get('[data-cy=password]').focus().type(password);
 
-  cy.server();
-  cy.route('POST', '**/login').as('postUser');
+  cy.intercept('POST', '**/login').as('postUser');
 
   cy.get('[data-cy=login-btn]').click();
 
