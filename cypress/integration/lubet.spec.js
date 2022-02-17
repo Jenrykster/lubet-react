@@ -15,7 +15,7 @@ function generateEmail(length) {
 }
 
 describe('Lubet test', () => {
-  it.skip('Creates an user', () => {
+  it('Creates an user', () => {
     cy.visit('http://localhost:3000/register');
 
     // EMPTY FIELDS
@@ -60,7 +60,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it.skip('Logins an user', () => {
+  it('Logins an user', () => {
     cy.visit('http://localhost:3000/');
 
     // EMPTY FIELDSs
@@ -92,7 +92,7 @@ describe('Lubet test', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
   });
 
-  it.skip('Logouts an user', () => {
+  it('Logouts an user', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
     cy.get('.swal2-confirm').click();
     cy.get('[data-cy=logout-btn]').click();
@@ -153,7 +153,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it.skip('Completes the cart with random games', () => {
+  it('Completes the cart with random games', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
     cy.get('.swal2-confirm').click();
 
@@ -161,8 +161,26 @@ describe('Lubet test', () => {
 
     const MIN_CART_VALUE = Cypress.env('minCartValue');
     const NUMBER_OF_GAMES = Cypress.env('gameTypes').length;
-
     let cartValue = 0;
+
+    // ADD EMPTY BET TO CART
+    cy.get('[data-cy=add-to-cart-btn]').click();
+    cy.get('.swal2-title').should('contain', 'Add more numbers');
+    cy.get('[data-cy=curr-cart-value]')
+      .invoke('text')
+      .then((cartText) => {
+        cartValue = parseValue(cartText);
+      });
+    cy.wrap(cartValue).should('eq', 0);
+    cy.get('.swal2-confirm').click();
+
+    // ADD MORE THAN PERMITTED PER BET
+    cy.get('[data-cy=complete-game-btn]').click();
+    cy.get('[data-cy=inactive-number]').first().click();
+    cy.get('.swal2-title').should('contain', "You can't add more numbers!");
+    cy.get('.swal2-confirm').click();
+
+    // VALID
 
     const addRandomGamesToCart = () => {
       cy.get('[data-cy=curr-cart-value]')
@@ -189,7 +207,7 @@ describe('Lubet test', () => {
     addRandomGamesToCart();
   });
 
-  it.skip('Filters the bets', () => {
+  it('Filters the bets', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
     cy.get('.swal2-confirm').click();
     cy.intercept('GET', '**/bet/all-bets?**').as('filterBets');

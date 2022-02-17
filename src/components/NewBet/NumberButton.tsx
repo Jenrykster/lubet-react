@@ -29,6 +29,7 @@ const NumberButton = (props: {
     <NumberButtonStyles
       color={props.color}
       active={props.active}
+      data-cy={props.active ? 'active-number' : 'inactive-number'}
       onClick={props.onButtonToggle}
     >
       {props.children}
