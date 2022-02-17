@@ -54,7 +54,7 @@ const LoginForm = () => {
 
   return (
     <FormWrapper title='Authenticate'>
-      <form onSubmit={handleSubmit(requestUserLogin.fire)}>
+      <form data-cy='form' onSubmit={handleSubmit(requestUserLogin.fire)}>
         <Card>
           <FormInput
             inputName={InputTypes.email}

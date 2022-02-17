@@ -15,7 +15,10 @@ const FormInput = (props: {
   return (
     <React.Fragment>
       {props.errors[props.inputName] && (
-        <ErrorLabel htmlFor={props.inputName}>
+        <ErrorLabel
+          data-cy={props.inputName + '-error-label'}
+          htmlFor={props.inputName}
+        >
           {props.defaultError ||
             props.errors[props.inputName]?.message ||
             'input error'}

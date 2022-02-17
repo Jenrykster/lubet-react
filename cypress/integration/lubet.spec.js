@@ -17,10 +17,35 @@ function generateEmail(length) {
 describe('Lubet test', () => {
   it('Creates an user', () => {
     cy.visit('http://localhost:3000/register');
-    cy.get('[data-cy=name]').focus().type('Nome de Alguém');
-    cy.get('[data-cy=email]').focus().type(generateEmail(6));
 
-    cy.get('[data-cy=password]').focus().type(TEST_USER_PASSWORD);
+    // EMPTY FIELDS
+    cy.get('[data-cy=sign-up-btn]').click();
+
+    cy.get('[data-cy=name-error-label]').should('exist').and('not.be.empty');
+    cy.get('[data-cy=email-error-label]').should('exist').and('not.be.empty');
+    cy.get('[data-cy=password-error-label]')
+      .should('exist')
+      .and('not.be.empty');
+
+    // INVALID NAME (TOO SHORT)
+    cy.get('[data-cy=name]').focus().type('N');
+    cy.get('[data-cy=name-error-label]').should('exist').and('not.be.empty');
+
+    // INVALID EMAIL
+    cy.get('[data-cy=email]').focus().type('invalid-mail@');
+    cy.get('[data-cy=email-error-label]').should('exist').and('not.be.empty');
+
+    // INVALID PASSWORD
+    cy.get('[data-cy=password]').focus().type('AAA');
+    cy.get('[data-cy=password-error-label]')
+      .should('exist')
+      .and('not.be.empty');
+
+    // VALID FORM
+    cy.get('[data-cy=name]').focus().clear().type('Fulano');
+    cy.get('[data-cy=email]').focus().clear().type(generateEmail(6));
+
+    cy.get('[data-cy=password]').focus().clear().type(TEST_USER_PASSWORD);
 
     cy.intercept('POST', '**/user/create').as('postUser');
 
@@ -35,11 +60,11 @@ describe('Lubet test', () => {
     });
   });
 
-  it('Logins an user', () => {
+  it.skip('Logins an user', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
   });
 
-  it('Logouts an user', () => {
+  it.skip('Logouts an user', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
     cy.get('.swal2-confirm').click();
     cy.get('[data-cy=logout-btn]').click();
@@ -49,7 +74,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it('Resets a password', () => {
+  it.skip('Resets a password', () => {
     cy.visit('http://localhost:3000/reset');
     cy.get('[data-cy=email]').focus().type(TEST_USER_EMAIL);
 
@@ -84,7 +109,7 @@ describe('Lubet test', () => {
     });
   });
 
-  it('Completes the cart with random games', () => {
+  it.skip('Completes the cart with random games', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
     cy.get('.swal2-confirm').click();
 
@@ -120,7 +145,7 @@ describe('Lubet test', () => {
     addRandomGamesToCart();
   });
 
-  it('Filters the bets', () => {
+  it.skip('Filters the bets', () => {
     cy.login(TEST_USER_EMAIL, TEST_USER_PASSWORD);
     cy.get('.swal2-confirm').click();
     cy.intercept('GET', '**/bet/all-bets?**').as('filterBets');

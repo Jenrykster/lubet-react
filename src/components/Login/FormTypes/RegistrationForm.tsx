@@ -21,7 +21,10 @@ const RegistrationForm = () => {
 
   return (
     <FormWrapper title='Registration'>
-      <form onSubmit={handleSubmit(requestUserRegistration.fire)}>
+      <form
+        data-cy='form'
+        onSubmit={handleSubmit(requestUserRegistration.fire)}
+      >
         <Card>
           <FormInput
             errors={errors}

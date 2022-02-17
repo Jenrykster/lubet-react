@@ -52,7 +52,7 @@ const ResetPasswordForm = () => {
   );
 
   const changePasswordForm = (
-    <form onSubmit={handleSubmit(requestNewPassword.fire)}>
+    <form data-cy='form' onSubmit={handleSubmit(requestNewPassword.fire)}>
       <Card>
         <FormInput
           inputName={InputTypes.password}
