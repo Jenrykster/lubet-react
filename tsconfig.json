@@ -1,6 +1,15 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": ".",
+    "paths": {
+      "@hooks/*": ["./src/hooks/index.ts"],
+      "@pages/*": ["./src/pages/*"],
+      "@store/*": ["./src/store/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@components/*": ["./src/components/*"],
+      "@schemas/*": ["./src/schemas/*"]
+    },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -14,7 +23,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "downlevelIteration": true
   },
-  "include": ["src"]
+  "include": ["src", "src/components/SharedComponents/SelectorButton/.tsx"]
 }

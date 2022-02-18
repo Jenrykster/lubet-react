@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
-import Games from './components/Games/Games';
-import Login from './components/Login/Login';
-import NewBet from './components/NewBet/NewBet';
-import Footer from './components/shared/Footer';
-import LoginCheck from './components/shared/Utils/LoginCheck';
+import Games from './pages/Games';
+import Login from './pages/Login';
+import NewBet from './pages/NewBet';
+import Footer from '@components/SharedComponents/Footer';
+import LoginCheck from '@components/SharedComponents/Utils/LoginCheck';
 import { loginUser, UserState } from './store/slices/userSlice';
+import Account from './pages/Account';
 
 const AppContainer = styled.div`
   color: #707070;
@@ -20,7 +21,6 @@ function App() {
       localStorage.getItem('userData') || '{}'
     );
     if (Object.keys(usrData).length > 0) {
-      console.log('logado');
       dispatch(loginUser(usrData));
     }
   }, [dispatch]);
@@ -34,6 +34,14 @@ function App() {
           element={
             <LoginCheck>
               <Games />
+            </LoginCheck>
+          }
+        />
+        <Route
+          path='/account'
+          element={
+            <LoginCheck>
+              <Account />
             </LoginCheck>
           }
         />

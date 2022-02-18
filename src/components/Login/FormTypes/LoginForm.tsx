@@ -1,20 +1,16 @@
-import Card from '../../shared/Primitives/Card';
-import Input from '../../shared/Primitives/Input';
-import TextLink from '../../shared/Primitives/Text';
-import TextButton from '../../shared/TextButton';
-import BoldText from '../../shared/Primitives/BoldText';
-import { Link, useNavigate } from 'react-router-dom';
-import TransitionPage from '../../shared/Utils/TransitionPage';
+import { Card, TextButton } from '@components/SharedComponents';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '@store/store';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import loginSchema from '../../../auth/schemas/login';
-import ErrorLabel from '../../shared/Primitives/ErrorLabel';
-import { login } from '../../../auth/auth';
-import { loginUser } from '../../../store/slices/userSlice';
+import loginSchema from '@schemas/login';
+import { login } from '@shared/services/auth/auth';
+import { loginUser } from '@store/slices/userSlice';
+import { FormInput, FormWrapper, ResetPasswordLink } from '..';
+import { IData, InputTypes } from '@shared/interfaces';
+import { useUserRequest } from '@hooks/';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -23,6 +19,10 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(loginSchema) });
+  const requestUserLogin = useUserRequest(login, {
+    route: '/games',
+    message: 'Logged in successfully',
+  });
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -33,66 +33,52 @@ const LoginForm = () => {
     }
   }, [navigate, isLoggedIn]);
 
-  const authenticate = async (data: any) => {
-    const { email, password } = data;
-    if (isLoggedIn) {
-      Swal.fire("You're already logged in!", '', 'info');
-      navigate('/games');
-      return;
-    }
-    const response = await login(email, password);
+  const onLoginSuccess = (response: IData) => {
     if (
-      response &&
-      response.status === 200 &&
-      response.data.user &&
-      response.data.token
+      response.user &&
+      response.token &&
+      typeof response.token !== 'string' &&
+      'token' in response.token
     ) {
       const userData = {
-        email: response.data.user.email,
-        name: response.data.user.name,
-        isAdmin: response.data.user.isAdmin,
-        token: response.data.token.token,
+        email: response.user.email,
+        name: response.user.name,
+        isAdmin: response.user.isAdmin,
+        token: response.token.token,
       };
       dispatch(loginUser(userData));
       localStorage.setItem('userData', JSON.stringify(userData));
     }
-    const icon = response && response.status === 200 ? 'success' : 'error';
-    const errorMessage =
-      (response && response.data.message) || 'There was an error !';
-    const title = icon === 'success' ? 'Logado com sucesso!' : errorMessage;
-    Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
-    navigate('/games');
   };
+  requestUserLogin.appendOnSuccess(onLoginSuccess);
 
   return (
-    <TransitionPage>
-      <BoldText>Authentication</BoldText>
-      <form onSubmit={handleSubmit(authenticate)}>
+    <FormWrapper title='Authenticate'>
+      <form data-cy='form' onSubmit={handleSubmit(requestUserLogin.fire)}>
         <Card>
-          {errors.email && (
-            <ErrorLabel htmlFor='email'>{errors.email.message}</ErrorLabel>
-          )}
-          <Input type='text' placeholder='Email' {...register('email')} />
-          {errors.password && (
-            <ErrorLabel htmlFor='password'>min password length is 6</ErrorLabel>
-          )}
-          <Input
-            type='password'
-            placeholder='Password'
-            {...register('password')}
+          <FormInput
+            inputName={InputTypes.email}
+            errors={errors}
+            register={register}
           />
-          <TextLink>
-            <Link to='/reset'>I forgot my password</Link>
-          </TextLink>
-          <TextButton primary text='Log in' arrow />
+          <FormInput
+            inputName={InputTypes.password}
+            errors={errors}
+            register={register}
+            defaultError='min password length is 6'
+            password
+          />
+          <ResetPasswordLink />
+          <TextButton data-cy='login-btn' primary text='Log in' arrow />
         </Card>
         <TextButton
+          data-cy='sign-up-btn'
           text='Sign Up'
           arrow
           onClick={() => navigate('/register')}
         />
       </form>
-    </TransitionPage>
+    </FormWrapper>
   );
 };
 
