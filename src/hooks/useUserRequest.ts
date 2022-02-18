@@ -17,8 +17,7 @@ export const useUserRequest = (
       onSuccessHandler(response.data);
     }
     const icon = response && response.status === 200 ? 'success' : 'error';
-    const errorMessage =
-      (response && response.data.message) || 'There was an error !';
+    const errorMessage = (response && response) || 'Invalid email !';
     const title = icon === 'success' ? onSuccess.message : errorMessage;
     Swal.fire({ title, icon, confirmButtonColor: '#B5C401' });
     navigate(onSuccess.route);

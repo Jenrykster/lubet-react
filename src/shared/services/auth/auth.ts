@@ -17,7 +17,7 @@ const request = async (
   try {
     response = await api.request<AxiosRequestConfig>(options);
   } catch (error: any) {
-    response = error.response;
+    response = error.data.message;
   }
 
   return response;
